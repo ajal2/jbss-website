@@ -1,101 +1,88 @@
-import Image from "next/image";
+import { getProjects } from "@/lib/cms";
+import { StatsBanner } from "@/components/StatsBanner";
+import { IndiaMap } from "@/components/IndiaMap";
+import { Capabilities } from "@/components/Capabilities";
+import { TwoColumnGrid } from "@/components/TwoColumnGrid";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const projects = await getProjects();
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      {/* HERO — full-viewport cinematic film */}
+      <section className="relative flex min-h-[calc(100vh-72px)] items-end overflow-hidden bg-deep-green">
+        {/* Background video — drop /public/hero.mp4 (and optional /public/hero-poster.jpg). */}
+        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+        <video
+          className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/hero-poster.jpg"
+          aria-hidden
+        >
+          <source src="/hero.mp4" type="video/mp4" />
+        </video>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        {/* Legibility overlay — deep-green wash, darker toward the bottom where the headline sits */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-b from-deep-green/50 via-deep-green/70 to-deep-green/95"
+        />
+
+        {/* Brand dot-grid texture, kept subtle on top of the video */}
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, #5BAE3C 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+
+        <div className="relative mx-auto w-full max-w-7xl px-6 pb-20 pt-32 md:pb-32 md:pt-44">
+          {/* Editorial spine — runs the height of the hero content area */}
+          <div
+            aria-hidden
+            className="absolute inset-y-0 left-0 w-[3px] bg-brand-green md:left-0"
+          />
+
+          <p className="mb-10 text-xs font-medium uppercase tracking-[0.25em] text-brand-green/90">
+            Jalota Business Support Services LLP · Since 2016
+          </p>
+          <h1 className="max-w-5xl text-balance text-5xl font-medium leading-[1.02] tracking-tight text-offwhite md:text-7xl lg:text-[5.5rem]">
+            Waste processing infrastructure for India&apos;s public sector and
+            institutional clients.
+          </h1>
+          <p className="mt-12 max-w-2xl text-lg leading-relaxed text-offwhite/70 md:text-xl">
+            EPC delivery and long-term operations of Construction &amp;
+            Demolition processing plants and municipal sanitation systems.
+          </p>
+
+          {/* Atlas plate — film-slate inspired, bottom-right */}
+          <p className="mt-16 text-right text-[10px] uppercase leading-[1.4] tracking-[0.22em] text-offwhite/50 md:absolute md:bottom-8 md:right-6 md:mt-0">
+            <span className="font-medium text-offwhite/80">JBSS LLP</span> ·
+            Gurgaon · India · {new Date().getFullYear()}
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* STATS BANNER */}
+      <StatsBanner projects={projects} />
+
+      {/* GEOGRAPHIC FOOTPRINT — India map with project pins */}
+      <IndiaMap projects={projects} />
+
+      {/* CAPABILITIES — three expertise areas */}
+      <Capabilities projects={projects} />
+
+      {/* FEATURED PORTFOLIO — featured projects only + CTA to /projects */}
+      <TwoColumnGrid projects={projects} showFeaturedOnly />
+    </>
   );
 }
