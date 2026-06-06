@@ -1,66 +1,67 @@
-const FOUNDING_YEAR = 2016;
+import Image from "next/image";
+import Link from "next/link";
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
   return (
-    <footer className="mt-24 border-t border-charcoal/10 bg-offwhite">
-      <div className="relative mx-auto max-w-7xl px-6 py-14 md:py-16">
-        {/* Editorial spine — matches every other section */}
-        <div
-          aria-hidden
-          className="absolute inset-y-0 left-0 w-[3px] bg-brand-green"
-        />
-
-        {/* Colophon header */}
-        <header className="mb-10 flex flex-col gap-y-3 md:mb-12 md:flex-row md:items-end md:justify-between md:gap-x-8">
+    <footer className="bg-ink-2 text-[#cdd2c5]">
+      <div className="container-x">
+        <div className="grid grid-cols-1 gap-[30px] py-[clamp(48px,6vw,74px)] md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          {/* Brand + tagline */}
           <div>
-            <p className="text-xs font-medium uppercase tracking-[0.25em] text-brand-green">
-              Colophon
-            </p>
-            <h2 className="mt-4 text-balance text-2xl font-medium leading-[1.1] tracking-tight text-charcoal md:text-3xl">
-              Jalota Business Support Services LLP.
-            </h2>
-          </div>
-          <dl className="flex shrink-0 items-baseline gap-x-6 text-[11px] font-medium uppercase tracking-[0.16em] text-steel md:gap-x-8">
-            <div>
-              <dt className="sr-only">Established</dt>
-              <dd>
-                <span className="text-base font-medium tabular-nums text-charcoal md:text-lg">
-                  {FOUNDING_YEAR}
-                </span>{" "}
-                est.
-              </dd>
+            <div className="flex items-center gap-3">
+              <span className="inline-flex rounded-md bg-mist px-3 py-2.5">
+                <Image
+                  src="/logo.svg"
+                  alt="JBSS LLP"
+                  width={120}
+                  height={30}
+                  className="h-[30px] w-auto"
+                />
+              </span>
             </div>
-            <div>
-              <dt className="sr-only">Years operating</dt>
-              <dd>
-                <span className="text-base font-medium tabular-nums text-charcoal md:text-lg">
-                  {currentYear - FOUNDING_YEAR}+
-                </span>{" "}
-                years
-              </dd>
-            </div>
-          </dl>
-        </header>
-
-        {/* Three-column data block — hairline dividers, atlas-style */}
-        <div className="grid grid-cols-1 border-y border-charcoal/15 md:grid-cols-3">
-          <div className="border-charcoal/15 py-6 pr-0 md:border-r md:pr-8 md:py-7">
-            <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-steel">
-              Practice
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-charcoal">
-              Waste infrastructure since {FOUNDING_YEAR}. Construction &amp;
-              Demolition processing plants and municipal sanitation operations
-              for India&apos;s public sector.
+            <p className="mt-[18px] max-w-[30ch] text-[0.92rem] text-[#aab09f]">
+              Waste infrastructure since 2016 — Construction &amp; Demolition
+              processing and municipal Solid Waste Management for India&apos;s
+              public sector.
             </p>
           </div>
 
-          <div className="border-t border-charcoal/15 py-6 md:border-l-0 md:border-r md:border-t-0 md:px-8 md:py-7">
-            <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-steel">
-              Registered office
-            </p>
-            <address className="mt-3 text-sm not-italic leading-relaxed text-charcoal">
+          {/* Pages */}
+          <div>
+            <h4 className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.12em] text-green-300">
+              Pages
+            </h4>
+            <ul className="mt-3.5 flex flex-col gap-2.5">
+              <li>
+                <Link href="/#what" className="hover:text-white">
+                  What we do
+                </Link>
+              </li>
+              <li>
+                <Link href="/#capabilities" className="hover:text-white">
+                  Capabilities
+                </Link>
+              </li>
+              <li>
+                <Link href="/projects" className="hover:text-white">
+                  Projects
+                </Link>
+              </li>
+              <li>
+                <Link href="/#about" className="hover:text-white">
+                  About
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Office */}
+          <div>
+            <h4 className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.12em] text-green-300">
+              Office
+            </h4>
+            <address className="mt-3.5 not-italic leading-[1.7] text-[0.92rem] text-[#aab09f]">
               58 GF, The Sapphire
               <br />
               Sector 49, Sohna Road
@@ -69,25 +70,22 @@ export function Footer() {
             </address>
           </div>
 
-          <div className="border-t border-charcoal/15 py-6 md:border-t-0 md:pl-8 md:py-7">
-            <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-steel">
+          {/* Contact */}
+          <div>
+            <h4 className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.12em] text-green-300">
               Contact
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-steel">
-              [email — pending]
-              <br />
-              [phone — pending]
-            </p>
+            </h4>
+            <ul className="mt-3.5 flex flex-col gap-2.5">
+              <li className="text-[0.92rem]">[email — pending]</li>
+              <li className="text-[0.92rem]">[phone — pending]</li>
+            </ul>
           </div>
         </div>
 
-        {/* Footer baseline */}
-        <div className="mt-8 flex flex-col-reverse items-start gap-3 text-[10px] uppercase tracking-[0.18em] text-steel md:mt-10 md:flex-row md:items-center md:justify-between">
-          <p>© {currentYear} Jalota Business Support Services LLP</p>
-          <p>
-            <span className="font-medium text-charcoal">JBSS LLP</span> ·
-            Gurgaon · India · {currentYear}
-          </p>
+        {/* Baseline */}
+        <div className="flex flex-wrap justify-between gap-3 border-t border-line-dk py-[22px] font-mono text-[0.68rem] uppercase tracking-[0.08em] text-[#8b9182]">
+          <span>© {year} Jalota Business Support Services LLP</span>
+          <span>Gurgaon · India</span>
         </div>
       </div>
     </footer>

@@ -1,19 +1,27 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Archivo, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 
-const inter = Inter({
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-archivo",
   display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  variable: "--font-space-mono",
+  display: "swap",
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "JBSS LLP — Waste Infrastructure since 2016",
+  title: "JBSS LLP — Waste infrastructure, built and operated",
   description:
-    "JBSS LLP designs, builds, and operates Construction & Demolition waste processing plants and municipal sanitation systems across India. Since 2016.",
+    "Jalota Business Support Services LLP. Construction & Demolition processing plants and municipal sanitation systems — delivered turnkey, then run for up to 15 years.",
 };
 
 export default function RootLayout({
@@ -22,8 +30,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="flex min-h-screen flex-col bg-offwhite text-charcoal antialiased">
+    <html
+      lang="en"
+      className={`${archivo.variable} ${spaceMono.variable}`}
+    >
+      <body className="flex min-h-screen flex-col bg-paper text-ink antialiased">
         <Nav />
         <div className="flex-1">{children}</div>
         <Footer />
