@@ -20,7 +20,7 @@ export function Hero() {
       />
 
       <div className="container-x relative">
-        <div className="pb-[clamp(40px,6vw,70px)] pt-[clamp(70px,12vw,150px)]">
+        <div className="pb-[clamp(32px,5vw,58px)] pt-[clamp(60px,10vw,120px)]">
           <p className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-terra-300">
             Jalota Business Support Services LLP
           </p>
@@ -45,15 +45,15 @@ export function Hero() {
                 →
               </span>
             </Link>
-            <Link
-              href="#contact"
+            <a
+              href="mailto:aryanjalota@jbssgroup.com?subject=Hello%20JBSS&body=Hi%20JBSS%20team%2C%0A%0A"
               className="group inline-flex items-center gap-2.5 rounded-[4px] border-[1.5px] border-white/45 bg-transparent px-[22px] py-[13px] text-[0.95rem] font-semibold text-white transition-colors hover:border-white"
             >
               Get in touch
               <span className="transition-transform group-hover:translate-x-1">
                 →
               </span>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

@@ -173,7 +173,7 @@ export function FootprintMap({ projects }: Props) {
           </div>
         </div>
 
-        <div className="mt-[clamp(26px,3vw,40px)] grid grid-cols-1 gap-[clamp(28px,3vw,48px)] lg:grid-cols-[1fr_260px]">
+        <div className="mt-[clamp(22px,2.5vw,34px)] grid grid-cols-1 gap-[clamp(20px,2.5vw,36px)] lg:grid-cols-[1fr_260px]">
           {/* Main map stage */}
           <div
             className="relative overflow-hidden rounded-xl"

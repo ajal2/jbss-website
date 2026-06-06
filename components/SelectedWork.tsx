@@ -43,7 +43,7 @@ export function SelectedWork({ projects }: Props) {
           </Link>
         </div>
 
-        <div className="mt-[clamp(36px,5vw,54px)] grid grid-cols-1 gap-[clamp(18px,2.4vw,28px)] md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-[clamp(28px,4vw,42px)] grid grid-cols-1 gap-[clamp(16px,2vw,24px)] md:grid-cols-2 lg:grid-cols-3">
           {picked.map((p) => {
             const title = p.displayName || p.projectName;
             const cap = p.capacityHeadline;
@@ -138,7 +138,7 @@ export function SelectedWork({ projects }: Props) {
           })}
         </div>
 
-        <div className="mt-[clamp(30px,4vw,46px)] border-t border-line pt-6">
+        <div className="mt-[clamp(24px,3vw,36px)] border-t border-line pt-5">
           <Link
             href="/projects"
             className="group inline-flex items-center gap-2.5 border-b-2 border-terra pb-[3px] font-semibold text-ink"

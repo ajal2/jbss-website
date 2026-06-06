@@ -4,10 +4,10 @@ export function ContactCTA() {
   return (
     <section
       id="contact"
-      className="bg-ink pad-section text-white scroll-mt-[86px]"
+      className="bg-ink pad-section text-white scroll-mt-[100px]"
     >
       <div className="container-x">
-        <div className="grid grid-cols-1 items-center gap-[clamp(30px,5vw,64px)] md:grid-cols-[1.3fr_1fr]">
+        <div className="grid grid-cols-1 items-center gap-[clamp(26px,4vw,52px)] md:grid-cols-[1.3fr_1fr]">
           <div className="reveal">
             <h2 className="text-h1 text-white">
               Have a tender or a site to discuss?
@@ -18,7 +18,7 @@ export function ContactCTA() {
             </p>
             <div className="mt-[30px] flex flex-wrap gap-3.5">
               <a
-                href="mailto:info@jbss.in?subject=Project%20enquiry%20%E2%80%94%20JBSS%20LLP&body=Hi%20JBSS%20team%2C%0A%0A"
+                href="mailto:aryanjalota@jbssgroup.com?subject=Project%20enquiry%20%E2%80%94%20JBSS%20LLP&body=Hi%20JBSS%20team%2C%0A%0A"
                 className="group inline-flex items-center gap-2.5 rounded-[4px] border-[1.5px] border-terra bg-terra px-[22px] py-[13px] text-[0.95rem] font-semibold text-white transition-colors hover:border-terra-700 hover:bg-terra-700"
               >
                 Start a conversation
@@ -53,11 +53,29 @@ export function ContactCTA() {
             <p className="mt-[22px] font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-green-300">
               Get in touch
             </p>
-            <address className="mt-3.5 not-italic leading-[1.7] text-[#dcd8cc]">
-              <span className="font-mono">[email — pending]</span>
-              <br />
-              <span className="font-mono">[phone — pending]</span>
-            </address>
+            <ul className="mt-3.5 flex flex-col gap-2 leading-[1.6] text-[#dcd8cc]">
+              <li>
+                <a
+                  href="mailto:aryanjalota@jbssgroup.com"
+                  className="break-all hover:text-white"
+                >
+                  aryanjalota@jbssgroup.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:jbss0786@gmail.com"
+                  className="break-all hover:text-white"
+                >
+                  jbss0786@gmail.com
+                </a>
+              </li>
+              <li>
+                <a href="tel:+919891666049" className="hover:text-white">
+                  +91 98916 66049
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

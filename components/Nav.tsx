@@ -36,7 +36,7 @@ export function Nav() {
       }}
     >
       <div className="container-x">
-        <div className="flex h-[74px] items-center gap-7">
+        <div className="flex h-[86px] items-center gap-7">
           <Link
             href="/"
             aria-label="JBSS LLP home"
@@ -45,10 +45,10 @@ export function Nav() {
             <Image
               src="/logo.svg"
               alt="JBSS LLP"
-              width={140}
-              height={38}
+              width={180}
+              height={50}
               priority
-              className="h-[38px] w-auto"
+              className="h-[50px] w-auto"
             />
           </Link>
 

@@ -18,9 +18,9 @@ export function AboutTimeline({ projects }: Props) {
   });
 
   return (
-    <section id="about" className="pad-section scroll-mt-[86px]">
+    <section id="about" className="pad-section scroll-mt-[100px]">
       <div className="container-x">
-        <div className="grid grid-cols-1 items-center gap-[clamp(34px,5vw,72px)] md:grid-cols-[1.1fr_1fr]">
+        <div className="grid grid-cols-1 items-center gap-[clamp(28px,4vw,56px)] md:grid-cols-[1.1fr_1fr]">
           <div>
             <div className="mb-[22px] flex items-center gap-3">
               <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-tx-faint">

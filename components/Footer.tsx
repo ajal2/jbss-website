@@ -10,13 +10,13 @@ export function Footer() {
           {/* Brand + tagline */}
           <div>
             <div className="flex items-center gap-3">
-              <span className="inline-flex rounded-md bg-mist px-3 py-2.5">
+              <span className="inline-flex rounded-md bg-mist px-3.5 py-3">
                 <Image
                   src="/logo.svg"
                   alt="JBSS LLP"
-                  width={120}
-                  height={30}
-                  className="h-[30px] w-auto"
+                  width={160}
+                  height={42}
+                  className="h-[42px] w-auto"
                 />
               </span>
             </div>
@@ -75,9 +75,28 @@ export function Footer() {
             <h4 className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.12em] text-green-300">
               Contact
             </h4>
-            <ul className="mt-3.5 flex flex-col gap-2.5">
-              <li className="text-[0.92rem]">[email — pending]</li>
-              <li className="text-[0.92rem]">[phone — pending]</li>
+            <ul className="mt-3.5 flex flex-col gap-2.5 text-[0.92rem]">
+              <li>
+                <a
+                  href="mailto:aryanjalota@jbssgroup.com"
+                  className="break-all hover:text-white"
+                >
+                  aryanjalota@jbssgroup.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:jbss0786@gmail.com"
+                  className="break-all hover:text-white"
+                >
+                  jbss0786@gmail.com
+                </a>
+              </li>
+              <li>
+                <a href="tel:+919891666049" className="hover:text-white">
+                  +91 98916 66049
+                </a>
+              </li>
             </ul>
           </div>
         </div>

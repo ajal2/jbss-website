@@ -89,9 +89,9 @@ export function CapabilitiesPipeline() {
   return (
     <section
       id="capabilities"
-      className="bg-ink text-white scroll-mt-[86px]"
+      className="bg-ink text-white scroll-mt-[100px]"
     >
-      <div className="container-x py-[clamp(64px,9vw,120px)]">
+      <div className="container-x py-[clamp(48px,6vw,88px)]">
         {/* Eyebrow row */}
         <div className="mb-[22px] flex items-center gap-3">
           <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-terra-300">
@@ -114,7 +114,7 @@ export function CapabilitiesPipeline() {
         {/* Flow */}
         <div
           ref={flowRef}
-          className="relative mt-[clamp(38px,5vw,60px)] grid grid-cols-2 gap-y-[34px] sm:grid-cols-3 md:grid-cols-5 md:gap-y-0"
+          className="relative mt-[clamp(28px,4vw,46px)] grid grid-cols-2 gap-y-[28px] sm:grid-cols-3 md:grid-cols-5 md:gap-y-0"
         >
           {/* Track (gradient bg) */}
           <div
@@ -208,7 +208,7 @@ export function CapabilitiesPipeline() {
         </div>
 
         {/* Key strip */}
-        <div className="mt-[clamp(34px,4vw,48px)] flex flex-wrap gap-[22px] border-t border-line-dk pt-[26px]">
+        <div className="mt-[clamp(26px,3.5vw,38px)] flex flex-wrap gap-[22px] border-t border-line-dk pt-[20px]">
           <div className="flex items-center gap-2.5 text-[0.92rem] text-tx-dim">
             <span
               aria-hidden

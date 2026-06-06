@@ -19,7 +19,7 @@ export function WhatWeDo({ projects }: Props) {
     .reduce((sum, p) => sum + (p.subSites ?? 1), 0);
 
   return (
-    <section id="what" className="pad-section scroll-mt-[86px]">
+    <section id="what" className="pad-section scroll-mt-[100px]">
       <div className="container-x">
         {/* Eyebrow row with rule */}
         <div className="mb-[22px] flex items-center gap-3">
@@ -40,7 +40,7 @@ export function WhatWeDo({ projects }: Props) {
           </p>
         </div>
 
-        <div className="mt-[clamp(36px,5vw,56px)] grid grid-cols-1 gap-[clamp(20px,3vw,34px)] md:grid-cols-2">
+        <div className="mt-[clamp(28px,4vw,42px)] grid grid-cols-1 gap-[clamp(18px,2.5vw,28px)] md:grid-cols-2">
           {/* C&D card */}
           <article className="reveal flex flex-col overflow-hidden rounded-md border border-line bg-card">
             <div className="h-1 w-full bg-terra" />
