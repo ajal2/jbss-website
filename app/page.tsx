@@ -7,6 +7,7 @@ import { SelectedWork } from "@/components/SelectedWork";
 import { FootprintMap } from "@/components/FootprintMap";
 import { AboutTimeline } from "@/components/AboutTimeline";
 import { ContactCTA } from "@/components/ContactCTA";
+import { RevealObserver } from "@/components/RevealOnScroll";
 
 export const dynamic = "force-dynamic";
 
@@ -23,6 +24,7 @@ export default async function Home() {
       <FootprintMap projects={projects} />
       <AboutTimeline projects={projects} />
       <ContactCTA />
+      <RevealObserver />
     </>
   );
 }

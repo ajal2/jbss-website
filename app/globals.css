@@ -160,3 +160,46 @@ h4 {
     opacity: 0;
   }
 }
+
+/* ============================================================
+   Projects table — collapses to stacked cards <760px
+   ============================================================ */
+@media (max-width: 760px) {
+  .projects-table thead {
+    display: none;
+  }
+  .projects-table table,
+  .projects-table tbody,
+  .projects-table tr,
+  .projects-table td {
+    display: block;
+    width: 100%;
+  }
+  .projects-table tbody tr.row {
+    padding: 14px 4px;
+    position: relative;
+  }
+  .projects-table td {
+    padding: 4px 4px;
+    border: none;
+  }
+  .projects-table td[data-h]::before {
+    content: attr(data-h);
+    font-family: var(--font-space-mono), "Space Mono", monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tx-faint);
+    display: inline-block;
+    width: 92px;
+  }
+  /* Project name larger on mobile */
+  .projects-table tbody tr.row td:first-child {
+    font-size: 1.1rem;
+  }
+  /* Drawer takes more height on mobile (more vertical space when stacked) */
+  .projects-table .drawer-row > td > div {
+    max-height: 800px !important;
+  }
+}
+

@@ -5,10 +5,6 @@ type Props = {
   projects: Project[];
 };
 
-function cityShort(name?: string): string | undefined {
-  return name?.split(",")[0]?.trim();
-}
-
 export function SelectedWork({ projects }: Props) {
   const visible = projects.filter((p) => p.visibleOnWebsite);
   // Up to 3 featured projects; fall back to ordering by `order` if fewer than 3 featured
@@ -127,12 +123,6 @@ export function SelectedWork({ projects }: Props) {
                       <>
                         <span>·</span>
                         <span>{p.serviceModel}</span>
-                      </>
-                    )}
-                    {cityShort(p.city?.name) && (
-                      <>
-                        <span>·</span>
-                        <span>{cityShort(p.city?.name)}</span>
                       </>
                     )}
                   </div>

@@ -1,28 +1,21 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 /**
- * Adds the `in` class to its children's wrapper when it enters the viewport.
- * Children should opt in via `className="reveal"` (handled by globals.css).
- * Honors prefers-reduced-motion via the CSS rule.
+ * Global reveal-on-scroll observer.
+ *
+ * Mount once near the root. It watches every `.reveal` element in the document
+ * and adds `.in` when each enters the viewport. CSS in globals.css handles the
+ * fade/slide. Honors prefers-reduced-motion (CSS reveals immediately in that case).
+ *
+ * Mirrors the original homepage.js IntersectionObserver behavior.
  */
-export function RevealOnScroll({
-  children,
-  className = "",
-  asTag: Tag = "div",
-}: {
-  children: React.ReactNode;
-  className?: string;
-  asTag?: keyof JSX.IntrinsicElements;
-}) {
-  const ref = useRef<HTMLElement | null>(null);
-
+export function RevealObserver() {
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    const els = document.querySelectorAll(".reveal:not(.in)");
     if (!("IntersectionObserver" in window)) {
-      el.classList.add("in");
+      els.forEach((el) => el.classList.add("in"));
       return;
     }
     const io = new IntersectionObserver(
@@ -36,14 +29,9 @@ export function RevealOnScroll({
       },
       { rootMargin: "0px 0px -10% 0px", threshold: 0.1 },
     );
-    io.observe(el);
+    els.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
 
-  return (
-    // @ts-expect-error - ref typing for dynamic tag
-    <Tag ref={ref} className={`reveal ${className}`.trim()}>
-      {children}
-    </Tag>
-  );
+  return null;
 }
