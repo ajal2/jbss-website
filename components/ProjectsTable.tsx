@@ -457,18 +457,6 @@ function RowAndDrawer({
                   Scope of work
                 </span>
                 {row.scope}
-                <div className="mt-[18px]">
-                  <a
-                    href="#"
-                    className="group inline-flex items-center gap-2.5 border-b-2 border-terra pb-[3px] font-semibold text-ink opacity-60"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Full project page
-                    <span className="text-terra transition-transform group-hover:translate-x-1">
-                      →
-                    </span>
-                  </a>
-                </div>
               </div>
               <div className="grid grid-cols-2 content-start gap-y-4 gap-x-6">
                 <Spec k="Business line" v={row.line} />
