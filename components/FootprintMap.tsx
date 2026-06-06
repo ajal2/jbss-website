@@ -5,7 +5,6 @@ import {
   Geographies,
   Geography,
   Marker,
-  Line,
   ZoomableGroup,
 } from "react-simple-maps";
 import { useMemo, useState } from "react";
@@ -15,10 +14,6 @@ import type { Project } from "@/lib/cms";
 // India, full extent of Arunachal Pradesh. NEVER replace with world-atlas /
 // OSM. The handoff CLAUDE.md is explicit about this.
 const INDIA_GEO = "/india-states.geojson";
-
-// JBSS LLP registered office, Gurgaon, Haryana. Used as the visual origin
-// for the atmospheric radiating-arcs layer.
-const JBSS_HQ: [number, number] = [77.0266, 28.4595]; // [lng, lat]
 
 // Delhi / NCR bounding box — pins inside this box also appear on the inset.
 const DELHI_BBOX = {
@@ -113,7 +108,6 @@ export function FootprintMap({ projects }: Props) {
     }, new Map<string, number>()),
   ).sort((a, b) => b[1] - a[1]);
 
-  const arcTargets = pins.filter((p) => p.isOngoing);
   const delhiPins = pins.filter(isDelhiPin);
 
   // Pin radius compensates for zoom so pins stay visually consistent
@@ -275,56 +269,6 @@ export function FootprintMap({ projects }: Props) {
                     ))
                   }
                 </Geographies>
-
-                {/* Arcs (only at lower zoom — clutter at high zoom) */}
-                {zoom < 3 &&
-                  arcTargets.map((p) => (
-                    <Line
-                      key={`arc-${p.id}`}
-                      from={JBSS_HQ}
-                      to={[p.lng, p.lat]}
-                      stroke={p.isCnd ? "#C56A45" : "#3C7A4A"}
-                      strokeWidth={strokeW(0.6)}
-                      strokeOpacity={
-                        hovered ? (hovered.id === p.id ? 0.6 : 0.06) : 0.16
-                      }
-                      strokeLinecap="round"
-                      fill="none"
-                      style={{ transition: "stroke-opacity .2s ease" }}
-                    />
-                  ))}
-
-                {/* HQ marker */}
-                <Marker coordinates={JBSS_HQ}>
-                  <g>
-                    <circle
-                      r={pinR(4.5)}
-                      fill="var(--paper)"
-                      stroke="#20251F"
-                      strokeWidth={strokeW(1.4)}
-                    />
-                    <circle r={pinR(1.6)} fill="#20251F" />
-                  </g>
-                  <text
-                    x={pinR(9)}
-                    y={-pinR(7)}
-                    style={{
-                      fontFamily: "var(--font-space-mono), monospace",
-                      fontSize: 9 / Math.sqrt(zoom),
-                      fontWeight: 700,
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      fill: "#20251F",
-                      paintOrder: "stroke",
-                      stroke: "var(--paper)",
-                      strokeWidth: strokeW(3),
-                      strokeLinejoin: "round",
-                      pointerEvents: "none",
-                    }}
-                  >
-                    JBSS HQ
-                  </text>
-                </Marker>
 
                 {/* Project pins */}
                 {pins.map((pin) => {
@@ -504,16 +448,21 @@ export function FootprintMap({ projects }: Props) {
                       }
                     </Geographies>
 
-                    {/* HQ mark on inset */}
-                    <Marker coordinates={JBSS_HQ}>
-                      <circle r={3} fill="var(--paper)" stroke="#20251F" strokeWidth={1} />
-                      <circle r={1} fill="#20251F" />
-                    </Marker>
-
-                    {/* Delhi pins with persistent labels */}
+                    {/* Delhi pins with persistent labels.
+                        Label rule: city if specific; project name if city is
+                        the generic "Delhi" / "New Delhi" (e.g., DDA Parks
+                        Portfolio, which operates across NCT). */}
                     {delhiPins.map((pin) => {
                       const color = pin.isCnd ? "#C56A45" : "#3C7A4A";
                       const isActive = hovered?.id === pin.id;
+                      const isGenericCity =
+                        pin.city === "New Delhi" || pin.city === "Delhi";
+                      const rawLabel = isGenericCity ? pin.name : pin.city || pin.name;
+                      // Keep labels readable at the inset size
+                      const label =
+                        rawLabel.length > 18
+                          ? rawLabel.slice(0, 16) + "…"
+                          : rawLabel;
                       return (
                         <Marker
                           key={`delhi-${pin.id}`}
@@ -564,7 +513,7 @@ export function FootprintMap({ projects }: Props) {
                               pointerEvents: "none",
                             }}
                           >
-                            {pin.city || pin.name}
+                            {label}
                           </text>
                         </Marker>
                       );
@@ -598,7 +547,7 @@ export function FootprintMap({ projects }: Props) {
                 ))}
               </ul>
               <p className="mt-4 text-[0.85rem] leading-[1.5] text-tx-faint">
-                Arcs radiate from JBSS HQ in Gurgaon. Hover any pin for detail.
+                Hover any pin for detail. Drag to pan; scroll to zoom.
               </p>
             </div>
           </aside>
