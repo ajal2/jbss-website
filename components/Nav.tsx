@@ -9,7 +9,6 @@ const NAV_ITEMS = [
   { href: "/#what", label: "What we do" },
   { href: "/#capabilities", label: "Capabilities" },
   { href: "/projects", label: "Projects" },
-  { href: "/#about", label: "About" },
 ];
 
 export function Nav() {

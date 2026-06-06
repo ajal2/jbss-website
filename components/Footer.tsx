@@ -48,11 +48,6 @@ export function Footer() {
                   Projects
                 </Link>
               </li>
-              <li>
-                <Link href="/#about" className="hover:text-white">
-                  About
-                </Link>
-              </li>
             </ul>
           </div>
 

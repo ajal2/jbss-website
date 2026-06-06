@@ -5,7 +5,6 @@ import { WhatWeDo } from "@/components/WhatWeDo";
 import { CapabilitiesPipeline } from "@/components/CapabilitiesPipeline";
 import { SelectedWork } from "@/components/SelectedWork";
 import { FootprintMap } from "@/components/FootprintMap";
-import { AboutTimeline } from "@/components/AboutTimeline";
 import { ContactCTA } from "@/components/ContactCTA";
 import { RevealObserver } from "@/components/RevealOnScroll";
 
@@ -22,7 +21,6 @@ export default async function Home() {
       <CapabilitiesPipeline />
       <SelectedWork projects={projects} />
       <FootprintMap projects={projects} />
-      <AboutTimeline projects={projects} />
       <ContactCTA />
       <RevealObserver />
     </>
