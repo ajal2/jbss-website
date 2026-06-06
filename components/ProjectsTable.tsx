@@ -103,7 +103,7 @@ export function ProjectsTable({ projects }: Props) {
 
   const visible = useMemo(() => {
     const q = search.trim().toLowerCase();
-    let r = rows.filter((row) => {
+    const r = rows.filter((row) => {
       if (lineFilter !== "all" && row.lineKey !== lineFilter) return false;
       if (statusFilter !== "all" && row.statusKey !== statusFilter) return false;
       if (q) {

@@ -124,6 +124,7 @@ function readPlace(
   latOverride?: number,
   lngOverride?: number,
 ): { name?: string; lat?: number; lng?: number } | undefined {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const anyProp = prop as any;
   const isPlace = anyProp?.type === "place";
   const name = isPlace ? anyProp.place?.name : undefined;
