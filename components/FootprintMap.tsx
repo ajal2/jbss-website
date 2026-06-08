@@ -4,6 +4,7 @@ import {
   ComposableMap,
   Geographies,
   Geography,
+  Graticule,
   Marker,
   ZoomableGroup,
 } from "react-simple-maps";
@@ -179,7 +180,7 @@ export function FootprintMap({ projects }: Props) {
             className="relative overflow-hidden rounded-xl"
             style={{
               background:
-                "radial-gradient(circle at 1px 1px, rgba(32,37,31,.05) 1px, transparent 0) 0 0/28px 28px, var(--paper)",
+                "radial-gradient(120% 90% at 30% 8%, rgba(60,122,74,.05) 0%, transparent 55%), radial-gradient(circle at 1px 1px, rgba(32,37,31,.05) 1px, transparent 0) 0 0/28px 28px, var(--paper)",
               minHeight: 520,
               borderTop: "1px solid var(--line)",
               borderBottom: "1px solid var(--line)",
@@ -231,6 +232,18 @@ export function FootprintMap({ projects }: Props) {
                     <feMergeNode in="SourceGraphic" />
                   </feMerge>
                 </filter>
+                {/* Lifts the landmass off the paper — shadow of the outer
+                    silhouette only, since adjacent state fills form one
+                    contiguous alpha region. */}
+                <filter id="land-shadow" x="-15%" y="-15%" width="130%" height="135%">
+                  <feDropShadow
+                    dx="0"
+                    dy="3"
+                    stdDeviation="5"
+                    floodColor="#20251F"
+                    floodOpacity="0.16"
+                  />
+                </filter>
               </defs>
 
               <ZoomableGroup
@@ -243,32 +256,41 @@ export function FootprintMap({ projects }: Props) {
                   setZoom(z);
                 }}
               >
-                <Geographies geography={INDIA_GEO}>
-                  {({ geographies }) =>
-                    geographies.map((geo) => (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        style={{
-                          default: {
-                            fill: "var(--card)",
-                            stroke: "rgba(32,37,31,.16)",
-                            strokeWidth: 0.6 / Math.sqrt(zoom),
-                            strokeLinejoin: "round",
-                            outline: "none",
-                          },
-                          hover: {
-                            fill: "var(--card)",
-                            stroke: "rgba(32,37,31,.16)",
-                            strokeWidth: 0.6 / Math.sqrt(zoom),
-                            outline: "none",
-                          },
-                          pressed: { fill: "var(--card)", outline: "none" },
-                        }}
-                      />
-                    ))
-                  }
-                </Geographies>
+                {/* Surveyed lat/long grid behind the plate */}
+                <Graticule
+                  stroke="rgba(32,37,31,.06)"
+                  strokeWidth={0.4 / Math.sqrt(zoom)}
+                  step={[5, 5]}
+                />
+
+                <g filter="url(#land-shadow)">
+                  <Geographies geography={INDIA_GEO}>
+                    {({ geographies }) =>
+                      geographies.map((geo) => (
+                        <Geography
+                          key={geo.rsmKey}
+                          geography={geo}
+                          style={{
+                            default: {
+                              fill: "var(--card)",
+                              stroke: "rgba(32,37,31,.16)",
+                              strokeWidth: 0.6 / Math.sqrt(zoom),
+                              strokeLinejoin: "round",
+                              outline: "none",
+                            },
+                            hover: {
+                              fill: "var(--card)",
+                              stroke: "rgba(32,37,31,.16)",
+                              strokeWidth: 0.6 / Math.sqrt(zoom),
+                              outline: "none",
+                            },
+                            pressed: { fill: "var(--card)", outline: "none" },
+                          }}
+                        />
+                      ))
+                    }
+                  </Geographies>
+                </g>
 
                 {/* Project pins */}
                 {pins.map((pin) => {
@@ -418,35 +440,61 @@ export function FootprintMap({ projects }: Props) {
                     height={260}
                     style={{ width: "100%", height: "auto" }}
                   >
-                    <Geographies geography={INDIA_GEO}>
-                      {({ geographies }) =>
-                        geographies.map((geo) => (
-                          <Geography
-                            key={geo.rsmKey}
-                            geography={geo}
-                            style={{
-                              default: {
-                                fill: "var(--card)",
-                                stroke: "rgba(32,37,31,.18)",
-                                strokeWidth: 0.5,
-                                strokeLinejoin: "round",
-                                outline: "none",
-                              },
-                              hover: {
-                                fill: "var(--card)",
-                                stroke: "rgba(32,37,31,.18)",
-                                strokeWidth: 0.5,
-                                outline: "none",
-                              },
-                              pressed: {
-                                fill: "var(--card)",
-                                outline: "none",
-                              },
-                            }}
-                          />
-                        ))
-                      }
-                    </Geographies>
+                    <defs>
+                      <filter
+                        id="land-shadow-inset"
+                        x="-15%"
+                        y="-15%"
+                        width="130%"
+                        height="135%"
+                      >
+                        <feDropShadow
+                          dx="0"
+                          dy="2"
+                          stdDeviation="3"
+                          floodColor="#20251F"
+                          floodOpacity="0.14"
+                        />
+                      </filter>
+                    </defs>
+
+                    <Graticule
+                      stroke="rgba(32,37,31,.06)"
+                      strokeWidth={0.4}
+                      step={[0.5, 0.5]}
+                    />
+
+                    <g filter="url(#land-shadow-inset)">
+                      <Geographies geography={INDIA_GEO}>
+                        {({ geographies }) =>
+                          geographies.map((geo) => (
+                            <Geography
+                              key={geo.rsmKey}
+                              geography={geo}
+                              style={{
+                                default: {
+                                  fill: "var(--card)",
+                                  stroke: "rgba(32,37,31,.18)",
+                                  strokeWidth: 0.5,
+                                  strokeLinejoin: "round",
+                                  outline: "none",
+                                },
+                                hover: {
+                                  fill: "var(--card)",
+                                  stroke: "rgba(32,37,31,.18)",
+                                  strokeWidth: 0.5,
+                                  outline: "none",
+                                },
+                                pressed: {
+                                  fill: "var(--card)",
+                                  outline: "none",
+                                },
+                              }}
+                            />
+                          ))
+                        }
+                      </Geographies>
+                    </g>
 
                     {/* Delhi pins with persistent labels.
                         Label rule: city if specific; project name if city is

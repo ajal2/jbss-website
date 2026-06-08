@@ -21,10 +21,7 @@ export function Hero() {
 
       <div className="container-x relative">
         <div className="pb-[clamp(32px,5vw,58px)] pt-[clamp(60px,10vw,120px)]">
-          <p className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-terra-300">
-            Jalota Business Support Services LLP
-          </p>
-          <h1 className="mt-[22px] max-w-[17ch] text-display text-white">
+          <h1 className="max-w-[17ch] text-display text-white">
             We build{" "}
             <em className="not-italic" style={{ color: "var(--green-300)" }}>
               and operate
