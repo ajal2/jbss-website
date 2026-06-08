@@ -206,6 +206,23 @@ export function FootprintMap({ projects }: Props) {
               </div>
             )}
 
+            {/* Atlas registration furniture — corner ticks frame the plate */}
+            <div aria-hidden className="pointer-events-none absolute inset-0 z-[2]">
+              <span className="absolute left-4 top-4 h-3.5 w-3.5 border-l border-t border-tx-faint/40" />
+              <span className="absolute right-4 top-4 h-3.5 w-3.5 border-r border-t border-tx-faint/40" />
+              <span className="absolute bottom-4 left-4 h-3.5 w-3.5 border-b border-l border-tx-faint/40" />
+              <span className="absolute bottom-4 right-4 h-3.5 w-3.5 border-b border-r border-tx-faint/40" />
+            </div>
+
+            {/* Projection / datum caption — doubles as the India-aligned
+                credibility signal; swaps out for the drag hint when zoomed */}
+            {zoom === 1 && (
+              <div className="pointer-events-none absolute bottom-5 left-5 z-[4] font-mono text-[0.58rem] uppercase leading-[1.6] tracking-[0.14em] text-tx-faint">
+                <div>geoMercator</div>
+                <div className="opacity-70">India-aligned datum</div>
+              </div>
+            )}
+
             <ComposableMap
               projection="geoMercator"
               projectionConfig={{ scale: 1050, center: [82, 22] }}
@@ -238,10 +255,10 @@ export function FootprintMap({ projects }: Props) {
                 <filter id="land-shadow" x="-15%" y="-15%" width="130%" height="135%">
                   <feDropShadow
                     dx="0"
-                    dy="3"
-                    stdDeviation="5"
+                    dy="4"
+                    stdDeviation="6"
                     floodColor="#20251F"
-                    floodOpacity="0.16"
+                    floodOpacity="0.2"
                   />
                 </filter>
               </defs>
@@ -258,7 +275,7 @@ export function FootprintMap({ projects }: Props) {
               >
                 {/* Surveyed lat/long grid behind the plate */}
                 <Graticule
-                  stroke="rgba(32,37,31,.06)"
+                  stroke="rgba(32,37,31,.085)"
                   strokeWidth={0.4 / Math.sqrt(zoom)}
                   step={[5, 5]}
                 />
@@ -272,19 +289,19 @@ export function FootprintMap({ projects }: Props) {
                           geography={geo}
                           style={{
                             default: {
-                              fill: "var(--card)",
-                              stroke: "rgba(32,37,31,.16)",
-                              strokeWidth: 0.6 / Math.sqrt(zoom),
+                              fill: "#e3dccb",
+                              stroke: "rgba(32,37,31,.22)",
+                              strokeWidth: 0.7 / Math.sqrt(zoom),
                               strokeLinejoin: "round",
                               outline: "none",
                             },
                             hover: {
-                              fill: "var(--card)",
-                              stroke: "rgba(32,37,31,.16)",
-                              strokeWidth: 0.6 / Math.sqrt(zoom),
+                              fill: "#e3dccb",
+                              stroke: "rgba(32,37,31,.22)",
+                              strokeWidth: 0.7 / Math.sqrt(zoom),
                               outline: "none",
                             },
-                            pressed: { fill: "var(--card)", outline: "none" },
+                            pressed: { fill: "#e3dccb", outline: "none" },
                           }}
                         />
                       ))
@@ -310,7 +327,7 @@ export function FootprintMap({ projects }: Props) {
                         {pin.isOngoing && (
                           <>
                             <circle
-                              r={pinR(9)}
+                              r={pinR(11)}
                               fill="none"
                               stroke={color}
                               strokeWidth={strokeW(1)}
@@ -324,7 +341,7 @@ export function FootprintMap({ projects }: Props) {
                               }}
                             />
                             <circle
-                              r={pinR(9)}
+                              r={pinR(11)}
                               fill="none"
                               stroke={color}
                               strokeWidth={strokeW(1)}
@@ -341,10 +358,10 @@ export function FootprintMap({ projects }: Props) {
                           </>
                         )}
                         <circle
-                          r={pinR(isActive ? 6 : 4.5)}
+                          r={pinR(isActive ? 7.5 : 5.5)}
                           fill={color}
                           stroke="var(--paper)"
-                          strokeWidth={strokeW(1.4)}
+                          strokeWidth={strokeW(1.6)}
                           filter={`url(#${glowId})`}
                           style={{ transition: "r .18s ease" }}
                         />
@@ -473,20 +490,20 @@ export function FootprintMap({ projects }: Props) {
                               geography={geo}
                               style={{
                                 default: {
-                                  fill: "var(--card)",
-                                  stroke: "rgba(32,37,31,.18)",
+                                  fill: "#e3dccb",
+                                  stroke: "rgba(32,37,31,.24)",
                                   strokeWidth: 0.5,
                                   strokeLinejoin: "round",
                                   outline: "none",
                                 },
                                 hover: {
-                                  fill: "var(--card)",
-                                  stroke: "rgba(32,37,31,.18)",
+                                  fill: "#e3dccb",
+                                  stroke: "rgba(32,37,31,.24)",
                                   strokeWidth: 0.5,
                                   outline: "none",
                                 },
                                 pressed: {
-                                  fill: "var(--card)",
+                                  fill: "#e3dccb",
                                   outline: "none",
                                 },
                               }}
