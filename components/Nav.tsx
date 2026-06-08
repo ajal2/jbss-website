@@ -9,12 +9,17 @@ const NAV_ITEMS = [
   { href: "/#what", label: "What we do" },
   { href: "/#capabilities", label: "Capabilities" },
   { href: "/projects", label: "Projects" },
+  { href: "/outlook", label: "Outlook" },
 ];
 
 export function Nav() {
   const pathname = usePathname();
   const [elevated, setElevated] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // The Outlook page is a dark / atmospheric "briefing room"; the shared nav
+  // restyles dark on that route so it belongs to the page.
+  const isDark = pathname.startsWith("/outlook");
 
   useEffect(() => {
     const onScroll = () => setElevated(window.scrollY > 12);
@@ -25,9 +30,12 @@ export function Nav() {
 
   return (
     <header
-      className="sticky top-0 z-50 border-b border-line backdrop-blur"
+      className="sticky top-0 z-50 border-b backdrop-blur"
       style={{
-        backgroundColor: "color-mix(in srgb, var(--mist) 92%, transparent)",
+        backgroundColor: isDark
+          ? "color-mix(in srgb, var(--ink) 90%, transparent)"
+          : "color-mix(in srgb, var(--mist) 92%, transparent)",
+        borderColor: isDark ? "rgba(255,255,255,.10)" : "var(--line)",
         boxShadow: elevated
           ? "0 10px 30px -22px rgba(32,37,31,.45)"
           : "none",
@@ -54,17 +62,21 @@ export function Nav() {
           {/* Desktop nav */}
           <nav className="ml-2 hidden items-center gap-8 md:flex">
             {NAV_ITEMS.map((item) => {
-              const isActive =
-                item.href === "/projects"
-                  ? pathname.startsWith("/projects")
-                  : false; // Anchor links don't have active state
+              const isActive = item.href.startsWith("/")
+                ? pathname.startsWith(item.href) && item.href !== "/"
+                : false; // Anchor links don't have active state
+              const linkColor = isDark
+                ? isActive
+                  ? "text-white"
+                  : "text-[#c3c8b9] hover:text-white"
+                : isActive
+                  ? "text-ink"
+                  : "text-tx-soft hover:text-ink";
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`group relative py-1.5 text-[0.95rem] font-medium transition-colors hover:text-ink ${
-                    isActive ? "text-ink" : "text-tx-soft"
-                  }`}
+                  className={`group relative py-1.5 text-[0.95rem] font-medium transition-colors ${linkColor}`}
                 >
                   {item.label}
                   <span
@@ -96,7 +108,11 @@ export function Nav() {
             type="button"
             aria-label="Menu"
             onClick={() => setMobileOpen((v) => !v)}
-            className="ml-auto inline-flex items-center gap-2 rounded-[4px] border-[1.5px] border-line px-[22px] py-[13px] text-[0.95rem] font-semibold text-ink md:hidden"
+            className={`ml-auto inline-flex items-center gap-2 rounded-[4px] border-[1.5px] px-[22px] py-[13px] text-[0.95rem] font-semibold md:hidden ${
+              isDark
+                ? "border-[rgba(255,255,255,.18)] text-[#f1efe6]"
+                : "border-line text-ink"
+            }`}
           >
             {mobileOpen ? "Close" : "Menu"}
           </button>
@@ -104,13 +120,21 @@ export function Nav() {
 
         {/* Mobile dropdown */}
         {mobileOpen && (
-          <nav className="flex flex-col items-start gap-1 border-t border-line py-4 md:hidden">
+          <nav
+            className={`flex flex-col items-start gap-1 border-t py-4 md:hidden ${
+              isDark ? "border-[rgba(255,255,255,.10)]" : "border-line"
+            }`}
+          >
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className="w-full py-2 text-[1rem] font-medium text-tx-soft hover:text-ink"
+                className={`w-full py-2 text-[1rem] font-medium ${
+                  isDark
+                    ? "text-[#c3c8b9] hover:text-white"
+                    : "text-tx-soft hover:text-ink"
+                }`}
               >
                 {item.label}
               </Link>
