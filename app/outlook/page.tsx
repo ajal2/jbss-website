@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Outlook — JBSS LLP",
   description:
-    "India's waste-management mandate is hardening from guideline to constitutional obligation. JBSS already operates the model that mandate now demands.",
+    "India's waste rules are tightening from guideline to statutory and constitutional obligation. JBSS builds and operates the C&D and sanitation infrastructure those rules require.",
 };
 
 // Bind the two Evidence records to real Notion projects by name. Dynamic
@@ -80,16 +80,15 @@ export default async function OutlookPage() {
         <section className="ol-lens" id="lens">
           <div className="container-x">
             <p className="ol-tag">
-              <span className="ol-tag-n">01</span>
-              <span className="ol-tag-t">The Lens</span>
+              <span className="ol-tag-t">Context</span>
             </p>
             <h1 className="reveal">
-              Waste isn&apos;t a category, but a{" "}
-              <span className="ol-uline">misallocated material flow.</span>
+              India&apos;s waste rules now require what JBSS already{" "}
+              <span className="ol-uline">builds and operates.</span>
             </h1>
             <p className="ol-sub reveal">
-              Redirecting that flow is the work. We&apos;re still building the
-              capacity to do it everywhere we operate.
+              This page sets out where the regulation is heading, and the two
+              operations that already meet it.
             </p>
           </div>
         </section>
@@ -99,12 +98,11 @@ export default async function OutlookPage() {
           <div className="container-x">
             <div className="ol-tl-intro">
               <p className="ol-tag">
-                <span className="ol-tag-n">02</span>
-                <span className="ol-tag-t">The Direction</span>
+                <span className="ol-tag-t">Regulatory direction</span>
               </p>
               <h2>
                 In a decade, India&apos;s waste regulation has hardened from
-                guideline to constitutional obligation.
+                guideline to statutory and constitutional obligation.
               </h2>
             </div>
 
@@ -152,8 +150,7 @@ export default async function OutlookPage() {
               <div className="ol-era reveal">
                 <span className="ol-era-yrs">2025–26</span>
                 <div className="ol-era-name">
-                  Statutorily hardened, digitally tracked, constitutionally
-                  enforced.
+                  Statutory, digitally tracked, and enforced by the courts.
                 </div>
                 <div className="ol-anchors">
                   <div className="ol-anchor">
@@ -200,13 +197,6 @@ export default async function OutlookPage() {
               </div>
             </div>
 
-            {/* Direction close */}
-            <div className="ol-dir-close">
-              <p className="reveal">
-                The regulation now{" "}
-                <span className="ol-em">demands what we&apos;ve been building.</span>
-              </p>
-            </div>
           </div>
         </section>
 
@@ -218,8 +208,8 @@ export default async function OutlookPage() {
             </p>
             <h2 className="ol-proc-h2">From rubble to graded aggregate.</h2>
             <p className="ol-proc-sub">
-              What a C&amp;D plant actually does — demolition waste in, building
-              material out, through seven stages of treatment.
+              What a C&amp;D plant does: demolition waste in, building material
+              out, across seven stages.
             </p>
             <ol className="ol-flow">
               <li className="ol-step reveal">
@@ -335,11 +325,13 @@ export default async function OutlookPage() {
           <div className="container-x">
             <div className="ol-act-head reveal">
               <p className="ol-tag">
-                <span className="ol-tag-n">03</span>
-                <span className="ol-tag-t">The Evidence</span>
+                <span className="ol-tag-t">Evidence</span>
               </p>
-              <h2>Two plants already running the model.</h2>
-              <p className="ol-sub">The same logic, already in operation.</p>
+              <h2>Two plants already in operation.</h2>
+              <p className="ol-sub">
+                C&amp;D processing and institutional sanitation, under long-term
+                contract.
+              </p>
             </div>
 
             {/* Record 1 — Bareilly · C&D · terracotta */}
@@ -367,12 +359,10 @@ export default async function OutlookPage() {
                     the city&apos;s own works.
                   </p>
                   <p>
-                    Because the same team that built the line also runs it,{" "}
-                    <em>
-                      recovery is an operating target, not a commissioning claim.
-                    </em>{" "}
-                    The contract length is the point: the plant stays accountable
-                    for what it diverts, every year, for fifteen.
+                    The same team that built the line operates it, so recovery
+                    is measured in operation, not only at commissioning. Over a
+                    fifteen-year term, the plant is accountable for what it
+                    diverts each year.
                   </p>
                 </div>
                 <div className="ol-metrics">
@@ -408,17 +398,16 @@ export default async function OutlookPage() {
                 <h3>{r2.title}</h3>
                 <div className="ol-longform">
                   <p>
-                    At IIT Delhi, JBSS runs end-to-end campus sanitation —
+                    At IIT Delhi, JBSS runs full campus sanitation —
                     door-to-door collection across residential quarters,
                     hostels, academic blocks, the hospital and guest houses.
                     Waste is segregated at source into three streams: municipal
                     solid waste, horticulture waste and recyclables.
                   </p>
                   <p>
-                    Operating inside a single institution lets the model be{" "}
-                    <em>measured precisely — by stream, by building, by day</em>{" "}
-                    — which is the discipline the new national rules now ask of
-                    every city.
+                    Within a single institution, output is{" "}
+                    <em>measured by stream, by building and by day</em> — the
+                    discipline the new national rules now ask of every city.
                   </p>
                 </div>
                 <div className="ol-metrics">
@@ -443,8 +432,8 @@ export default async function OutlookPage() {
         <section className="ol-closing ol-section">
           <div className="container-x">
             <p className="reveal">
-              We operate in the circular economy.{" "}
-              <span className="ol-muted">We don&apos;t market it.</span>
+              JBSS has built and operated waste infrastructure{" "}
+              <span className="ol-muted">since 2016.</span>
             </p>
           </div>
         </section>

@@ -26,7 +26,7 @@ export function Hero() {
             <em className="not-italic" style={{ color: "var(--green-300)" }}>
               and operate
             </em>{" "}
-            India&apos;s waste infrastructure.
+            waste infrastructure across India.
           </h1>
           <p className="mt-[26px] max-w-[46ch] text-[clamp(1.05rem,1.6vw,1.3rem)] leading-[1.5] text-[#e7e3d8]">
             Construction &amp; Demolition processing plants and municipal

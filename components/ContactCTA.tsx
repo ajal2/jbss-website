@@ -13,15 +13,15 @@ export function ContactCTA() {
               Have a tender or a site to discuss?
             </h2>
             <p className="mt-[18px] text-lead" style={{ color: "#dcd8cc" }}>
-              Talk to the team that builds the plant and runs it — for the
-              public sector, institutions and private clients.
+              We work with the public sector, institutions and private clients —
+              from design and build through long-term operations.
             </p>
             <div className="mt-[30px] flex flex-wrap gap-3.5">
               <a
                 href="mailto:aryanjalota@jbssgroup.com?subject=Project%20enquiry%20%E2%80%94%20JBSS%20LLP&body=Hi%20JBSS%20team%2C%0A%0A"
                 className="group inline-flex items-center gap-2.5 rounded-[4px] border-[1.5px] border-terra bg-terra px-[22px] py-[13px] text-[0.95rem] font-semibold text-white transition-colors hover:border-terra-700 hover:bg-terra-700"
               >
-                Start a conversation
+                Email the team
                 <span className="transition-transform group-hover:translate-x-1">
                   →
                 </span>
