@@ -102,7 +102,7 @@ export function CapabilitiesPipeline() {
 
         <div className="max-w-[62ch]">
           <h2 className="text-h1 text-white">
-            Two service models on one pipeline.
+            One pipeline, two ways to contract.
           </h2>
           <p className="mt-[18px] text-lead" style={{ color: "var(--tx-dim)" }}>
             Every project moves along the same line. EPC contracts hand over at

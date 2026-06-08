@@ -49,20 +49,33 @@ export function SelectedWork({ projects }: Props) {
             const cap = p.capacityHeadline;
             const isOngoing = p.status === "Ongoing";
             const cover = p.coverImageUrl;
+            const isCnd = p.businessLine === "C&D";
+            // Split "300 TPD" / "1,850 homes" into a big tabular figure + mono unit;
+            // a purely non-numeric headline falls through whole, with no unit.
+            const capMatch = cap
+              ?.trim()
+              .match(/^([\d.,]+(?:\s*[–-]\s*[\d.,]+)?\+?)\s*(.*)$/);
+            const capFigure = capMatch ? capMatch[1] : cap;
+            const capUnit = capMatch ? capMatch[2] : "";
             return (
               <article
                 key={p.id}
                 className="reveal flex flex-col overflow-hidden rounded-md border border-line bg-card transition-all duration-200 hover:-translate-y-1"
-                style={{
-                  transitionProperty: "transform, box-shadow",
-                }}
+                style={{ transitionProperty: "transform, box-shadow" }}
               >
+                {/* Line-accent top bar — same motif as the "What we do" cards */}
+                <div
+                  aria-hidden
+                  className={`h-1 w-full ${isCnd ? "bg-terra" : "bg-green"}`}
+                />
+
+                {/* Documentary photo — the figure moved off it, so only a faint scrim remains */}
                 <div className="relative aspect-[4/3]">
                   {cover ? (
                     /* eslint-disable-next-line @next/next/no-img-element */
                     <img
                       src={cover}
-                      alt=""
+                      alt={`${title} — JBSS ${p.businessLine ?? ""} project site`.trim()}
                       className="absolute inset-0 h-full w-full object-cover"
                     />
                   ) : (
@@ -79,25 +92,18 @@ export function SelectedWork({ projects }: Props) {
                       </span>
                     </div>
                   )}
-                  {/* gradient overlay for caption legibility */}
                   <div
                     aria-hidden
                     className="pointer-events-none absolute inset-0"
                     style={{
                       background:
-                        "linear-gradient(transparent 50%, rgba(20,28,20,.55))",
+                        "linear-gradient(transparent 68%, rgba(20,28,20,.28))",
                     }}
                   />
-                  {cap && (
-                    <span
-                      className="absolute bottom-3 left-3.5 z-[2] font-mono text-[1.5rem] font-bold tracking-[-0.02em] text-white"
-                      style={{ textShadow: "0 1px 14px rgba(0,0,0,.5)" }}
-                    >
-                      {cap}
-                    </span>
-                  )}
                 </div>
+
                 <div className="flex flex-1 flex-col gap-2.5 px-5 pb-[22px] pt-[18px]">
+                  {/* Mono spec row — uniform monochrome: status · model · line */}
                   <div className="flex flex-wrap items-center gap-2.5 font-mono text-[0.7rem] uppercase tracking-[0.06em] text-tx-faint">
                     <span className="inline-flex items-center gap-1.5 text-tx-soft">
                       <span
@@ -121,16 +127,43 @@ export function SelectedWork({ projects }: Props) {
                     </span>
                     {p.serviceModel && (
                       <>
-                        <span>·</span>
+                        <span aria-hidden>·</span>
                         <span>{p.serviceModel}</span>
                       </>
                     )}
+                    {p.businessLine && (
+                      <>
+                        <span aria-hidden>·</span>
+                        <span>{p.businessLine}</span>
+                      </>
+                    )}
                   </div>
+
                   <h3 className="text-[1.3rem] font-bold tracking-[-0.02em] text-ink">
                     {title}
                   </h3>
+
                   {p.tileTagline && (
                     <p className="text-[0.95rem] text-tx-soft">{p.tileTagline}</p>
+                  )}
+
+                  {/* Dedicated capacity stat — figure + mono unit on a top hairline,
+                      echoing the "What we do" card stat block */}
+                  {cap && (
+                    <div className="mt-auto flex items-baseline gap-2.5 border-t border-line pt-[18px]">
+                      <span
+                        className={`text-2xl font-extrabold leading-none tracking-[-0.03em] tabular-nums ${
+                          isCnd ? "text-terra-700" : "text-green-700"
+                        }`}
+                      >
+                        {capFigure}
+                      </span>
+                      {capUnit && (
+                        <span className="font-mono text-[0.72rem] uppercase tracking-[0.08em] text-tx-faint">
+                          {capUnit}
+                        </span>
+                      )}
+                    </div>
                   )}
                 </div>
               </article>
