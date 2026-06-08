@@ -48,6 +48,11 @@ export function Footer() {
                   Projects
                 </Link>
               </li>
+              <li>
+                <Link href="/outlook" className="hover:text-white">
+                  Outlook
+                </Link>
+              </li>
             </ul>
           </div>
 
