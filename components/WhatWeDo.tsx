@@ -34,9 +34,8 @@ export function WhatWeDo({ projects }: Props) {
             Two business lines, one operating model.
           </h2>
           <p className="mt-[18px] text-lead">
-            We don&apos;t just build plants and walk away. JBSS designs,
-            constructs and commissions waste infrastructure — then stays on to
-            operate it.
+            JBSS designs, builds and commissions waste infrastructure, then
+            operates it under long-term contract.
           </p>
         </div>
 
@@ -111,12 +110,12 @@ export function WhatWeDo({ projects }: Props) {
                 </span>
               </div>
               <h3 className="text-[clamp(1.4rem,2.2vw,1.9rem)] font-bold tracking-[-0.02em] text-ink">
-                Sanitation operations, at city scale.
+                Municipal and institutional sanitation.
               </h3>
               <p className="text-[1.0625rem] leading-[1.65] text-tx-soft">
-                Long-term municipal sanitation and on-site composting across
-                cities and institutional clients — collection, segregation and
-                processing run day in, day out.
+                Long-term municipal and institutional sanitation with on-site
+                composting — collection, segregation and processing under O&amp;M
+                contract.
               </p>
               <div className="flex flex-wrap gap-2">
                 {["O&M", "composting", "collection"].map((chip) => (
