@@ -13,8 +13,8 @@ export function ContactCTA() {
               Have a tender or a site to discuss?
             </h2>
             <p className="mt-[18px] text-lead" style={{ color: "#dcd8cc" }}>
-              We work with the public sector, institutions and private clients —
-              from design and build through long-term operations.
+              We work with the public sector, institutions and private clients.
+              That covers design and build through to long-term operations.
             </p>
             <div className="mt-[30px] flex flex-wrap gap-3.5">
               <a

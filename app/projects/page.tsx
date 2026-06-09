@@ -29,7 +29,7 @@ export default async function ProjectsPage() {
                   Portfolio
                 </span>
               </div>
-              <h1 className="text-h1 text-ink">Every project, both lines.</h1>
+              <h1 className="text-h1 text-ink">Our projects across both lines</h1>
             </div>
             <dl className="flex gap-[clamp(20px,3vw,40px)]">
               <Stat n={total} label="Projects" />
