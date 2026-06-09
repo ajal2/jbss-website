@@ -18,9 +18,9 @@ const spaceMono = Space_Mono({
   weight: ["400", "700"],
 });
 
-const SITE_TITLE = "JBSS LLP — Waste infrastructure, built and operated";
+const SITE_TITLE = "JBSS LLP · Waste infrastructure, built and operated";
 const SITE_DESC =
-  "Jalota Business Support Services LLP. Construction & Demolition processing plants and municipal sanitation systems — delivered turnkey, then run for up to 15 years.";
+  "Jalota Business Support Services LLP. We build Construction & Demolition processing plants and municipal sanitation systems turnkey, then run them for up to 15 years.";
 const SITE_URL = "https://jbssgroup.com";
 
 export const metadata: Metadata = {
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "JBSS LLP — waste infrastructure",
+        alt: "JBSS LLP waste infrastructure",
       },
     ],
   },

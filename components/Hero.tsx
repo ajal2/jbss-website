@@ -30,7 +30,8 @@ export function Hero() {
           </h1>
           <p className="mt-[26px] max-w-[46ch] text-[clamp(1.05rem,1.6vw,1.3rem)] leading-[1.5] text-[#e7e3d8]">
             Construction &amp; Demolition processing plants and municipal
-            sanitation systems — delivered turnkey, then run for up to 15 years.
+            sanitation systems. We deliver them turnkey, then run them for up to
+            15 years.
           </p>
           <div className="mt-[34px] flex flex-wrap gap-3.5">
             <Link

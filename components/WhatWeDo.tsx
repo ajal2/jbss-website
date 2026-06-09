@@ -64,9 +64,9 @@ export function WhatWeDo({ projects }: Props) {
                 Processing plants, delivered &amp; run.
               </h3>
               <p className="text-[1.0625rem] leading-[1.65] text-tx-soft">
-                EPC delivery and long-term O&amp;M of municipal C&amp;D
-                processing plants — turning rubble into reusable aggregate.
-                Design, supply, build, commission, operate.
+                We design, supply, build and commission municipal C&amp;D
+                processing plants, then operate them under long-term O&amp;M. The
+                plant turns rubble into reusable aggregate.
               </p>
               <div className="flex flex-wrap gap-2">
                 {["EPC", "EPC + O&M", "turnkey"].map((chip) => (
@@ -114,8 +114,8 @@ export function WhatWeDo({ projects }: Props) {
               </h3>
               <p className="text-[1.0625rem] leading-[1.65] text-tx-soft">
                 Long-term municipal and institutional sanitation with on-site
-                composting — collection, segregation and processing under O&amp;M
-                contract.
+                composting. We handle collection, segregation and processing
+                under O&amp;M contract.
               </p>
               <div className="flex flex-wrap gap-2">
                 {["O&M", "composting", "collection"].map((chip) => (

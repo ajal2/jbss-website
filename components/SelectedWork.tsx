@@ -75,7 +75,7 @@ export function SelectedWork({ projects }: Props) {
                     /* eslint-disable-next-line @next/next/no-img-element */
                     <img
                       src={cover}
-                      alt={`${title} — JBSS ${p.businessLine ?? ""} project site`.trim()}
+                      alt={`${title}, JBSS ${p.businessLine ?? ""} project site`.trim()}
                       className="absolute inset-0 h-full w-full object-cover"
                     />
                   ) : (
@@ -176,7 +176,7 @@ export function SelectedWork({ projects }: Props) {
             href="/projects"
             className="group inline-flex items-center gap-2.5 border-b-2 border-terra pb-[3px] font-semibold text-ink"
           >
-            See the full portfolio — {totalVisible} projects across both lines
+            See the full portfolio: {totalVisible} projects across both lines
             <span className="text-terra transition-transform group-hover:translate-x-1">
               →
             </span>

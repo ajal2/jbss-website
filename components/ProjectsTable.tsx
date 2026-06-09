@@ -254,7 +254,7 @@ export function ProjectsTable({ projects }: Props) {
       </div>
 
       <p className="mt-[22px] max-w-[60ch] text-[0.9375rem] text-tx-faint">
-        Click any row for project detail. Capacity is shown as TPD for C&amp;D
+        Click any row to see project details. Capacity is shown as TPD for C&amp;D
         plants and operated sites for SWM contracts.
       </p>
     </>

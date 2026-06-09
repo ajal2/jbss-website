@@ -21,7 +21,7 @@ const STEPS = [
     icon: "⚙",
     num: "03",
     title: "Commission",
-    body: "Testing & handover to running state.",
+    body: "Testing and handover to a running state.",
     om: false,
   },
   {
@@ -35,7 +35,7 @@ const STEPS = [
     icon: "✦",
     num: "05",
     title: "Maintain",
-    body: "Upkeep & performance over the O&M term.",
+    body: "Upkeep and performance over the O&M term.",
     om: true,
   },
 ];
@@ -105,9 +105,9 @@ export function CapabilitiesPipeline() {
             One pipeline, two ways to contract.
           </h2>
           <p className="mt-[18px] text-lead" style={{ color: "var(--tx-dim)" }}>
-            Every project moves along the same line. EPC contracts hand over at
-            commissioning; EPC + O&amp;M contracts keep JBSS on to operate and
-            maintain — for up to 15 years.
+            Both contract types follow the same line. EPC contracts hand over at
+            commissioning. EPC + O&amp;M contracts keep JBSS on to operate and
+            maintain the plant for up to 15 years.
           </p>
         </div>
 
@@ -215,7 +215,7 @@ export function CapabilitiesPipeline() {
               className="h-[3px] w-[34px] rounded-[2px]"
               style={{ background: "var(--green)" }}
             />
-            <b className="font-bold text-white">EPC</b> — Design → Commission,
+            <b className="font-bold text-white">EPC</b>: Design to Commission,
             handed over turnkey
           </div>
           <div className="flex items-center gap-2.5 text-[0.92rem] text-tx-dim">
@@ -227,7 +227,7 @@ export function CapabilitiesPipeline() {
                   "repeating-linear-gradient(90deg, var(--terra) 0 6px, transparent 6px 11px)",
               }}
             />
-            <b className="font-bold text-white">EPC + O&amp;M</b> — the full
+            <b className="font-bold text-white">EPC + O&amp;M</b>: the full
             pipeline, up to 15 years
           </div>
         </div>
