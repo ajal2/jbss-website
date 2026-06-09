@@ -104,11 +104,6 @@ export function CapabilitiesPipeline() {
           <h2 className="text-h1 text-white">
             One pipeline, two ways to contract.
           </h2>
-          <p className="mt-[18px] text-lead" style={{ color: "var(--tx-dim)" }}>
-            Both contract types follow the same line. EPC contracts hand over at
-            commissioning. EPC + O&amp;M contracts keep JBSS on to operate and
-            maintain the plant for up to 15 years.
-          </p>
         </div>
 
         {/* Flow */}
