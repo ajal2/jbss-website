@@ -4,18 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-
-const NAV_ITEMS = [
-  { href: "/#what", label: "What we do" },
-  { href: "/#capabilities", label: "Capabilities" },
-  { href: "/projects", label: "Projects" },
-  { href: "/outlook", label: "Outlook" },
-];
+import { livePages } from "@/lib/nav";
 
 export function Nav() {
   const pathname = usePathname();
   const [elevated, setElevated] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navItems = livePages();
 
   // The Outlook page is a dark / atmospheric "briefing room"; the shared nav
   // restyles dark on that route so it belongs to the page.
@@ -61,10 +56,9 @@ export function Nav() {
 
           {/* Desktop nav */}
           <nav className="ml-2 hidden items-center gap-8 md:flex">
-            {NAV_ITEMS.map((item) => {
-              const isActive = item.href.startsWith("/")
-                ? pathname.startsWith(item.href) && item.href !== "/"
-                : false; // Anchor links don't have active state
+            {navItems.map((item) => {
+              const isActive =
+                pathname.startsWith(item.href) && item.href !== "/";
               const linkColor = isDark
                 ? isActive
                   ? "text-white"
@@ -125,7 +119,7 @@ export function Nav() {
               isDark ? "border-[rgba(255,255,255,.10)]" : "border-line"
             }`}
           >
-            {NAV_ITEMS.map((item) => (
+            {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
