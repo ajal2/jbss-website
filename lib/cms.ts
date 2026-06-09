@@ -1,5 +1,9 @@
 import { Client } from "@notionhq/client";
-import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import type {
+  PageObjectResponse,
+  ListBlockChildrenResponse,
+  RichTextItemResponse,
+} from "@notionhq/client/build/src/api-endpoints";
 
 export interface Project {
   id: string;
@@ -132,4 +136,154 @@ function readPlace(
   const lng = lngOverride ?? (isPlace ? anyProp.place?.longitude : undefined);
   if (!name && lat === undefined && lng === undefined) return undefined;
   return { name, lat, lng };
+}
+
+// ============================================================
+//  Careers — job openings, driven by a second Notion database.
+//  Mirrors the Projects pattern above and reuses its readers.
+//  The job *description* lives in the Notion page body (so a
+//  non-technical editor just opens the row and writes), and is
+//  fetched separately via getJobBody().
+// ============================================================
+
+export interface JobOpening {
+  id: string;
+  role: string;
+  location?: string;
+  type?: string;
+  department?: string;
+  order?: number;
+  /** Per-role form URL. Blank → the site falls back to the global form. */
+  applyLink?: string;
+  /** The "Visible on Website" checkbox — the editor's publish toggle. */
+  visible?: boolean;
+}
+
+/** A single rich-text run inside a body block. */
+export interface Span {
+  text: string;
+  bold?: boolean;
+  italic?: boolean;
+  href?: string;
+}
+
+/** A normalized page-body block. Only the handful of types below render. */
+export type Block =
+  | { kind: "p"; spans: Span[] }
+  | { kind: "h2"; spans: Span[] }
+  | { kind: "h3"; spans: Span[] }
+  | { kind: "bullet"; spans: Span[] }
+  | { kind: "number"; spans: Span[] };
+
+/** A job plus its rendered description body — what the careers page renders. */
+export type JobWithBody = JobOpening & { body: Block[] };
+
+export async function getJobOpenings(): Promise<JobOpening[]> {
+  return fetchJobOpeningsFromNotion();
+}
+
+async function fetchJobOpeningsFromNotion(): Promise<JobOpening[]> {
+  const databaseId = process.env.NOTION_CAREERS_DATABASE_ID;
+
+  // Graceful no-op until the careers database is wired up, so the page
+  // renders its empty state instead of crashing during setup.
+  if (!databaseId) {
+    console.warn(
+      "NOTION_CAREERS_DATABASE_ID is not set — careers page will show no openings.",
+    );
+    return [];
+  }
+
+  try {
+    const notion = notionClient();
+    const response = await notion.databases.query({
+      database_id: databaseId,
+      sorts: [{ property: "Order", direction: "ascending" }],
+    });
+
+    return response.results
+      .filter((page): page is PageObjectResponse => "properties" in page)
+      .map(notionPageToJob);
+  } catch (err) {
+    // e.g. the DB isn't shared with the integration yet — degrade to empty
+    // state rather than 500 the page.
+    console.error("Failed to load careers from Notion:", err);
+    return [];
+  }
+}
+
+function notionPageToJob(page: PageObjectResponse): JobOpening {
+  const props = page.properties;
+  return {
+    id: page.id,
+    role: readTitle(props["Role"]),
+    location: readRichText(props["Location"]),
+    type: readSelect(props["Type"]),
+    department: readSelect(props["Department"]),
+    order: readNumber(props["Order"]),
+    applyLink: readUrl(props["Apply Link"]),
+    // Same publish gate the team already uses on Projects.
+    visible: readCheckbox(props["Visible on Website"]),
+  };
+}
+
+/** Fetch a job's description from its Notion page body (top-level blocks only). */
+export async function getJobBody(pageId: string): Promise<Block[]> {
+  try {
+    const notion = notionClient();
+    const res = await notion.blocks.children.list({
+      block_id: pageId,
+      page_size: 100,
+    });
+    return res.results.map(toBlock).filter((b): b is Block => b !== null);
+  } catch (err) {
+    console.error(`Failed to load job body for ${pageId}:`, err);
+    return [];
+  }
+}
+
+function notionClient(): Client {
+  const apiKey = process.env.NOTION_API_KEY;
+  if (!apiKey) {
+    throw new Error("NOTION_API_KEY must be set in .env.local");
+  }
+  return new Client({ auth: apiKey });
+}
+
+function readUrl(prop: Property | undefined): string | undefined {
+  if (prop?.type !== "url") return undefined;
+  return prop.url ?? undefined;
+}
+
+type BlockResult = ListBlockChildrenResponse["results"][number];
+
+function toBlock(b: BlockResult): Block | null {
+  if (!("type" in b)) return null;
+  switch (b.type) {
+    case "paragraph": {
+      const spans = readSpans(b.paragraph.rich_text);
+      return spans.length ? { kind: "p", spans } : null; // drop blank lines
+    }
+    case "heading_2":
+      return { kind: "h2", spans: readSpans(b.heading_2.rich_text) };
+    case "heading_3":
+      return { kind: "h3", spans: readSpans(b.heading_3.rich_text) };
+    case "bulleted_list_item":
+      return { kind: "bullet", spans: readSpans(b.bulleted_list_item.rich_text) };
+    case "numbered_list_item":
+      return { kind: "number", spans: readSpans(b.numbered_list_item.rich_text) };
+    default:
+      return null; // images, dividers, etc. are intentionally skipped
+  }
+}
+
+function readSpans(rt: RichTextItemResponse[]): Span[] {
+  return rt
+    .map((t) => ({
+      text: t.plain_text,
+      bold: t.annotations.bold || undefined,
+      italic: t.annotations.italic || undefined,
+      href: t.href ?? undefined,
+    }))
+    .filter((s) => s.text.length > 0);
 }
