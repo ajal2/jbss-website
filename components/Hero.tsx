@@ -1,14 +1,53 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+// Hero backdrop rotates through field photos every ROTATE_MS with a crossfade.
+// Add more by dropping a file in /public/capabilities and appending here — the
+// component handles any number of slides (and shows a single static image if
+// there's only one, or the user prefers reduced motion).
+const SLIDES = [
+  {
+    src: "/capabilities/swm.jpg",
+    credit: "JBSS field operations · Solid Waste Management",
+  },
+  {
+    src: "/capabilities/C&D_Plant.jpg",
+    credit: "JBSS field operations · Construction & Demolition",
+  },
+];
+const ROTATE_MS = 3000;
 
 export function Hero() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    if (SLIDES.length <= 1) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(
+      () => setActive((i) => (i + 1) % SLIDES.length),
+      ROTATE_MS,
+    );
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-ink text-white">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/capabilities/swm.jpg"
-        alt="JBSS field crew collecting and loading garden waste"
-        className="absolute inset-0 h-full w-full object-cover"
-      />
+      {/* Rotating backdrop — crossfade between field photos */}
+      <div aria-hidden className="absolute inset-0">
+        {SLIDES.map((s, i) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            key={s.src}
+            src={s.src}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-in-out"
+            style={{ opacity: i === active ? 1 : 0 }}
+          />
+        ))}
+      </div>
+
       {/* Legibility scrim — two gradients per CSS */}
       <div
         aria-hidden
@@ -56,9 +95,12 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Hero credit, bottom right */}
-      <p className="absolute bottom-4 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-white/50" style={{ right: "var(--gutter)" }}>
-        JBSS field operations · Solid Waste Management
+      {/* Hero credit, bottom right — tracks the active slide */}
+      <p
+        className="absolute bottom-4 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-white/50"
+        style={{ right: "var(--gutter)" }}
+      >
+        {SLIDES[active].credit}
       </p>
     </section>
   );
