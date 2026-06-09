@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { livePages } from "@/lib/nav";
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const pages = [{ label: "Home", href: "/" }, ...livePages()];
   return (
     <footer className="bg-ink-2 text-[#cdd2c5]">
       <div className="container-x">
@@ -21,7 +23,7 @@ export function Footer() {
               </span>
             </div>
             <p className="mt-[18px] max-w-[30ch] text-[0.92rem] text-[#aab09f]">
-              Waste infrastructure since 2016 — Construction &amp; Demolition
+              Waste infrastructure since 2016. Construction &amp; Demolition
               processing and municipal Solid Waste Management for India&apos;s
               public sector.
             </p>
@@ -33,26 +35,13 @@ export function Footer() {
               Pages
             </h4>
             <ul className="mt-3.5 flex flex-col gap-2.5">
-              <li>
-                <Link href="/#what" className="hover:text-white">
-                  What we do
-                </Link>
-              </li>
-              <li>
-                <Link href="/#capabilities" className="hover:text-white">
-                  Capabilities
-                </Link>
-              </li>
-              <li>
-                <Link href="/projects" className="hover:text-white">
-                  Projects
-                </Link>
-              </li>
-              <li>
-                <Link href="/outlook" className="hover:text-white">
-                  Outlook
-                </Link>
-              </li>
+              {pages.map((p) => (
+                <li key={p.href}>
+                  <Link href={p.href} className="hover:text-white">
+                    {p.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
