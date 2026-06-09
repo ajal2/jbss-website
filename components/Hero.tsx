@@ -16,6 +16,10 @@ const SLIDES = [
     src: "/capabilities/C&D_Plant.jpg",
     credit: "JBSS field operations · Construction & Demolition",
   },
+  {
+    src: "/capabilities/Shiv_Nadar_School_Visit.jpeg",
+    credit: "JBSS · Shiv Nadar School site visit",
+  },
 ];
 const ROTATE_MS = 3000;
 
