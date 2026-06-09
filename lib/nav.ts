@@ -12,6 +12,7 @@ export const SITE_PAGES: NavItem[] = [
   { label: "About", href: "/about", enabled: false },
   { label: "Projects", href: "/projects" },
   { label: "Outlook", href: "/outlook" },
+  { label: "Careers", href: "/careers" },
 ];
 
 /** The pages currently live in the nav + footer, in order. */
