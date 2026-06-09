@@ -1,0 +1,377 @@
+/* ============================================================
+   JBSS — Outlook · LIGHT HYBRID
+   Airy paper body for prose + dark feature panels for the
+   rising-regulation chart and the material loop. Builds on the
+   shared palette tokens in globals.css. Scoped under `.outlook`
+   so nothing leaks to the rest of the site.
+   House style: mono eyebrows, hairlines, registration ticks,
+   tabular figures. Accent: terra (C&D) + green (SWM) only.
+   ============================================================ */
+
+/* ---------- page surface (LIGHT) + local tokens ---------- */
+.outlook {
+  --step-hero: clamp(2.3rem, 5vw, 4.2rem);
+  --step-2: clamp(1.7rem, 3.2vw, 2.7rem);
+  --step-3: clamp(1.12rem, 1.7vw, 1.42rem);
+  /* dark-panel surface tokens */
+  --on: #f1efe6; /* primary text on dark */
+  --on-2: #c3c8b9; /* body on dark */
+  --on-3: #8a9080; /* faint mono on dark */
+  --hair-d: rgba(255, 255, 255, 0.12);
+  --mono: var(--font-space-mono), "Space Mono", monospace;
+
+  background: var(--paper);
+  color: var(--tx);
+  overflow-x: clip;
+}
+.outlook ::selection { background: var(--terra); color: #fff; }
+.outlook section[id] { scroll-margin-top: 90px; }
+
+/* ---------- shared primitives (from homepage.css) ---------- */
+.outlook .tnum { font-variant-numeric: tabular-nums; }
+.outlook .eyebrow-row { display: flex; align-items: center; gap: 16px; }
+.outlook .eyebrow {
+  font-family: var(--mono); font-weight: 700; font-size: 0.72rem;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--tx-faint);
+  white-space: nowrap;
+}
+.outlook .eyebrow-row .rule { flex: 1; height: 1px; background: var(--line); }
+
+/* ============================================================
+   01 — THE ARGUMENT  (light lede)
+   ============================================================ */
+.outlook .lede { padding-block: clamp(56px, 9vh, 116px) clamp(48px, 7vh, 92px); }
+.outlook .lede .eyebrow-row { margin-bottom: clamp(26px, 4vh, 46px); }
+.outlook .lede-grid {
+  display: grid; grid-template-columns: 1.55fr 1fr; gap: clamp(34px, 5vw, 80px);
+  align-items: end;
+}
+.outlook .lede-h1 {
+  font-size: var(--step-hero); font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+  max-width: 18ch; text-wrap: balance; color: var(--tx);
+}
+.outlook .lede-sub {
+  margin-top: clamp(22px, 3.4vh, 38px); font-size: var(--step-3); font-weight: 500;
+  line-height: 1.5; color: var(--tx-soft); max-width: 44ch;
+}
+
+/* mini ascending ladder (echoes the big climb) */
+.outlook .lede-ladder { padding-bottom: 6px; }
+.outlook .ladder { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.outlook .lad {
+  --bar: color-mix(in srgb, var(--terra) 16%, transparent);
+  position: relative; border-left: 2px solid var(--line); padding: 9px 0 9px 14px;
+}
+.outlook .lad::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: var(--w);
+  background: var(--bar); border-right: 2px solid var(--terra);
+  z-index: 0; border-radius: 0 2px 2px 0;
+}
+.outlook .lad:nth-child(1) { --bar: color-mix(in srgb, var(--green) 13%, transparent); }
+.outlook .lad:nth-child(1)::before { border-right-color: var(--green); }
+.outlook .lad:nth-child(2) { --bar: color-mix(in srgb, var(--green) 18%, transparent); }
+.outlook .lad:nth-child(2)::before { border-right-color: var(--green-700); }
+.outlook .lad-k, .outlook .lad-v { position: relative; z-index: 1; display: block; }
+.outlook .lad-k { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--tx-faint); }
+.outlook .lad-v { font-size: 1.06rem; font-weight: 700; letter-spacing: -0.02em; color: var(--tx); margin-top: 2px; }
+
+/* ============================================================
+   02 — THE DIRECTION  (DARK feature panel)
+   ============================================================ */
+.outlook .direction {
+  position: relative; background: var(--ink); color: var(--on);
+  padding-block: clamp(58px, 8vh, 104px);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.022) 1px, transparent 0) 0 0/24px 24px,
+    radial-gradient(130% 100% at 88% -8%, rgba(224, 161, 131, 0.12), transparent 56%),
+    radial-gradient(120% 90% at 4% 112%, rgba(143, 191, 156, 0.08), transparent 54%);
+}
+.outlook .direction ::selection { background: var(--terra-300); color: var(--ink); }
+.outlook .direction .eyebrow { color: var(--terra-300); }
+.outlook .direction .eyebrow-row .rule { background: var(--hair-d); }
+
+/* corner registration ticks */
+.outlook .reg-tick { position: absolute; width: 16px; height: 16px; z-index: 2; pointer-events: none; opacity: 0.5; }
+.outlook .reg-tick.tl { top: 18px; left: 18px; border-top: 1.5px solid var(--on-3); border-left: 1.5px solid var(--on-3); }
+.outlook .reg-tick.tr { top: 18px; right: 18px; border-top: 1.5px solid var(--on-3); border-right: 1.5px solid var(--on-3); }
+.outlook .reg-tick.bl { bottom: 18px; left: 18px; border-bottom: 1.5px solid var(--on-3); border-left: 1.5px solid var(--on-3); }
+.outlook .reg-tick.br { bottom: 18px; right: 18px; border-bottom: 1.5px solid var(--on-3); border-right: 1.5px solid var(--on-3); }
+
+.outlook .dir-head { max-width: 60ch; }
+.outlook .dir-h2 { font-size: var(--step-2); font-weight: 800; letter-spacing: -0.035em; line-height: 1.04; color: var(--on); margin-top: 14px; max-width: 20ch; text-wrap: balance; }
+
+/* ============================================================
+   THE CLIMB  (stepped regulation chart)
+   ============================================================ */
+.outlook .climb-wrap { margin-top: clamp(40px, 6vh, 74px); }
+.outlook .climb { position: relative; }
+.outlook .plot {
+  position: relative; height: clamp(420px, 52vh, 560px);
+  padding-left: 138px; padding-top: 86px;
+}
+
+/* y-axis tiers + gridlines */
+.outlook .tiers { position: absolute; inset: 86px 0 0 0; pointer-events: none; }
+.outlook .tier { position: absolute; left: 0; right: 0; bottom: var(--y); height: 0; }
+.outlook .tier::after {
+  content: ""; position: absolute; left: 138px; right: 0; top: 0;
+  border-top: 1px dashed var(--hair-d);
+}
+.outlook .tier .t-lbl {
+  position: absolute; left: 0; width: 120px; top: -0.62em; text-align: right;
+  font-family: var(--mono); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--on-3); line-height: 1.25;
+}
+.outlook .tier.base::after { border-top-style: solid; border-top-color: var(--hair-d); }
+.outlook .tier.base .t-lbl { color: color-mix(in srgb, var(--on-3) 80%, transparent); }
+
+/* steps grid */
+.outlook .steps {
+  position: absolute; left: 138px; right: 0; top: 86px; bottom: 0;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+}
+.outlook .step { position: relative; height: 100%; --acc: var(--terra-300); }
+.outlook .step.apex { --acc: #f4ddca; }
+
+.outlook .step .fill {
+  position: absolute; left: 0; right: 0; bottom: 0; height: var(--h);
+  background: linear-gradient(to top,
+    color-mix(in srgb, var(--terra) 4%, transparent),
+    color-mix(in srgb, var(--terra) 20%, transparent));
+  border-top: 2.5px solid var(--acc);
+  box-shadow: 0 -1px 22px -2px color-mix(in srgb, var(--acc) 55%, transparent);
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform 0.9s cubic-bezier(0.22, 0.7, 0.18, 1);
+  transition-delay: calc(var(--i) * 140ms);
+}
+.outlook .climb.in .step .fill { transform: scaleY(1); }
+
+.outlook .step .riser {
+  position: absolute; left: 0; bottom: var(--hp);
+  height: calc(var(--h) - var(--hp)); width: 0;
+  border-left: 2.5px solid var(--acc);
+  box-shadow: 0 0 18px -1px color-mix(in srgb, var(--acc) 60%, transparent);
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform 0.5s cubic-bezier(0.22, 0.7, 0.18, 1);
+  transition-delay: calc(var(--i) * 140ms);
+}
+.outlook .climb.in .step .riser { transform: scaleY(1); }
+
+.outlook .step .node {
+  position: absolute; left: 0; bottom: var(--h); transform: translate(-50%, 50%);
+  width: 13px; height: 13px; border-radius: 50%;
+  background: var(--ink); border: 2.5px solid var(--acc);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--acc) 16%, transparent);
+  opacity: 0; transition: opacity 0.4s ease; transition-delay: calc(var(--i) * 140ms + 320ms);
+}
+.outlook .climb.in .step .node { opacity: 1; }
+.outlook .step.apex .node {
+  width: 17px; height: 17px; background: var(--acc);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--acc) 22%, transparent), 0 0 26px 2px color-mix(in srgb, var(--acc) 70%, transparent);
+}
+.outlook .step.apex .node::after {
+  content: ""; position: absolute; inset: -7px; border-radius: 50%;
+  border: 1.5px solid var(--acc); opacity: 0.5;
+  animation: apexping 2.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes apexping { 0% { transform: scale(0.6); opacity: 0.7; } 80%, 100% { transform: scale(1.7); opacity: 0; } }
+
+.outlook .step .drop {
+  position: absolute; left: 0; top: 0; bottom: var(--h); width: 0;
+  border-left: 1px dashed color-mix(in srgb, var(--acc) 45%, transparent);
+  opacity: 0; transition: opacity 0.5s ease; transition-delay: calc(var(--i) * 140ms + 220ms);
+}
+.outlook .climb.in .step .drop { opacity: 1; }
+
+.outlook .step .cap {
+  position: absolute; left: 0; bottom: calc(var(--h) + 16px);
+  width: calc(100% - 6px); padding-right: 10px;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 0.7, 0.18, 1);
+  transition-delay: calc(var(--i) * 140ms + 260ms);
+}
+.outlook .climb.in .step .cap { opacity: 1; transform: none; }
+.outlook .cap-tag {
+  display: inline-block; white-space: nowrap; font-family: var(--mono); font-size: 0.56rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 7px; border-radius: 3px;
+  border: 1px solid var(--hair-d); color: var(--on-2);
+}
+.outlook .cap-tag.cd { color: var(--terra-300); border-color: color-mix(in srgb, var(--terra-300) 50%, transparent); }
+.outlook .cap-tag.swm { color: var(--green-300); border-color: color-mix(in srgb, var(--green-300) 50%, transparent); }
+.outlook .cap-tag.epr { color: var(--green-300); border-color: color-mix(in srgb, var(--green-300) 45%, transparent); }
+.outlook .cap-tag.both { color: var(--on); border-color: var(--hair-d); }
+.outlook .cap-tag.law { color: var(--ink); background: #f4ddca; border-color: #f4ddca; }
+.outlook .cap-year { display: block; margin-top: 8px; font-family: var(--mono); font-weight: 700; font-size: 1.32rem; letter-spacing: -0.01em; color: var(--on); font-variant-numeric: tabular-nums; line-height: 1; }
+.outlook .step.apex .cap-year { color: #f4ddca; }
+.outlook .cap-name { display: block; margin-top: 5px; font-size: 0.92rem; font-weight: 700; letter-spacing: -0.01em; color: var(--on); line-height: 1.18; text-wrap: balance; }
+
+/* x-axis */
+.outlook .xaxis {
+  position: absolute; left: 138px; right: 0; bottom: -34px;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+}
+.outlook .xaxis .xt { text-align: center; font-family: var(--mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; color: var(--on-2); font-variant-numeric: tabular-nums; }
+
+/* ============================================================
+   APEX QUOTE (capstone)
+   ============================================================ */
+.outlook .apex-quote {
+  margin-top: clamp(54px, 8vh, 96px); max-width: 60ch;
+  border-top: 1px solid var(--hair-d); padding-top: clamp(32px, 5vh, 56px);
+  position: relative;
+}
+.outlook .apex-quote .aq-mark { display: block; font-family: var(--mono); font-size: 3rem; line-height: 0.6; color: var(--terra-300); opacity: 0.7; }
+.outlook .apex-quote .aq-intro { margin: 0 0 26px; font-size: 1.04rem; line-height: 1.6; color: var(--on-2); max-width: 56ch; }
+.outlook .apex-quote .aq-q {
+  margin: 14px 0 0; font-size: clamp(1.5rem, 2.8vw, 2.35rem); font-weight: 700;
+  letter-spacing: -0.025em; line-height: 1.22; color: var(--on); max-width: 26ch; text-wrap: balance;
+}
+.outlook .apex-quote .aq-cite { margin-top: 22px; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; line-height: 1.7; color: var(--on-3); }
+.outlook .apex-quote .aq-cite b { display: block; color: var(--green-300); font-weight: 700; letter-spacing: 0.02em; }
+
+/* ============================================================
+   BRIDGE
+   ============================================================ */
+.outlook .bridge { background: var(--paper); padding-block: clamp(54px, 9vh, 110px); }
+.outlook .bridge-line {
+  font-size: var(--step-2); font-weight: 800; letter-spacing: -0.035em; line-height: 1.06;
+  color: var(--tx); max-width: 22ch; text-wrap: balance;
+}
+.outlook .bridge-line .em { color: var(--terra-700); }
+
+/* ============================================================
+   03 — THE MODEL  (light · process flow)
+   ============================================================ */
+.outlook .model { padding-block: clamp(52px, 8vh, 100px) clamp(58px, 9vh, 116px); border-top: 1px solid var(--line); }
+.outlook .model-head { max-width: 60ch; }
+.outlook .model-h2 { font-size: var(--step-2); font-weight: 800; letter-spacing: -0.035em; margin-top: 14px; color: var(--tx); }
+.outlook .model-sub { margin-top: 14px; font-size: 1.04rem; line-height: 1.55; color: var(--tx-soft); max-width: 56ch; }
+
+.outlook .flowband {
+  margin-top: clamp(40px, 6vw, 68px);
+  display: grid; grid-template-columns: auto 1fr auto; gap: clamp(18px, 2.2vw, 34px);
+  align-items: center;
+}
+.outlook .fb-end {
+  display: flex; flex-direction: column; gap: 5px; padding: 18px;
+  border-radius: 6px; background: var(--card); border: 1px solid var(--line); min-width: 150px;
+}
+.outlook .fb-end .fb-k { font-family: var(--mono); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tx-faint); }
+.outlook .fb-end .fb-v { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; color: var(--tx); }
+.outlook .fb-end .fb-sub { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.02em; color: var(--tx-soft); }
+.outlook .fb-in { border-left: 4px solid var(--green); }
+.outlook .fb-out { border-left: 4px solid var(--terra); }
+
+.outlook .proc {
+  list-style: none; margin: 0; padding: 0; position: relative;
+  display: grid; grid-template-columns: repeat(7, 1fr);
+}
+.outlook .proc::before {
+  content: ""; position: absolute; left: calc(100% / 14); right: calc(100% / 14); top: 33px; height: 2px;
+  background: linear-gradient(90deg, var(--green) 0%, var(--green) 50%, var(--terra) 50%, var(--terra) 100%);
+  opacity: 0.28;
+}
+.outlook .flow-dot {
+  position: absolute; top: 33px; left: calc(100% / 14); width: 12px; height: 12px; border-radius: 50%;
+  background: var(--terra); border: 2px solid var(--paper); transform: translate(-50%, -50%);
+  box-shadow: 0 2px 8px rgba(32, 37, 31, 0.35); z-index: 3; opacity: 0; will-change: left;
+}
+.outlook .proc-step { position: relative; padding: 0 clamp(4px, 0.7vw, 12px); text-align: center; display: flex; flex-direction: column; align-items: center; }
+.outlook .proc-ic {
+  position: relative; z-index: 1; width: 68px; height: 68px; border-radius: 50%;
+  background: var(--card); border: 1.5px solid var(--line); display: grid; place-items: center;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.outlook .proc-step:last-child .proc-ic { border-color: var(--terra); background: color-mix(in srgb, var(--terra) 8%, var(--card)); }
+.outlook .proc-ic svg { width: 34px; height: 34px; display: block; color: var(--tx); fill: none; stroke: var(--tx); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.outlook .proc-ic svg .f { fill: currentColor; stroke: none; }
+.outlook .proc-step.lit .proc-ic { border-color: var(--terra); box-shadow: 0 0 0 4px color-mix(in srgb, var(--terra) 14%, transparent); transform: translateY(-2px); }
+.outlook .proc-step .ps-n { margin-top: 14px; font-family: var(--mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em; color: var(--terra-700); font-variant-numeric: tabular-nums; }
+.outlook .proc-step h3 { font-size: 0.98rem; font-weight: 700; letter-spacing: -0.01em; margin-top: 5px; color: var(--tx); }
+.outlook .proc-step p { margin-top: 8px; color: var(--tx-soft); font-size: 0.8rem; line-height: 1.4; max-width: 18ch; }
+
+/* ============================================================
+   CLOSING — the material loop (dark feature panel)
+   ============================================================ */
+.outlook .closing {
+  position: relative; background: var(--ink); color: var(--on); border-top: none;
+  padding-block: clamp(56px, 9vh, 112px);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.022) 1px, transparent 0) 0 0/24px 24px,
+    radial-gradient(110% 90% at 50% -8%, rgba(143, 191, 156, 0.1), transparent 58%),
+    radial-gradient(110% 90% at 50% 108%, rgba(224, 161, 131, 0.1), transparent 58%);
+}
+.outlook .closing ::selection { background: var(--terra-300); color: var(--ink); }
+.outlook .loop-head { max-width: 56ch; }
+.outlook .loop-h2 { font-size: var(--step-2); font-weight: 800; letter-spacing: -0.035em; line-height: 1.04; color: var(--on); margin-top: 14px; max-width: 16ch; }
+
+.outlook .loop-fig { position: relative; width: clamp(300px, 52vw, 540px); aspect-ratio: 1; margin: clamp(64px, 10vh, 116px) auto; }
+.outlook .loop-svg { width: 100%; height: 100%; overflow: visible; display: block; }
+.outlook .loop-track { fill: none; stroke: var(--hair-d); stroke-width: 1.5; }
+.outlook .loop-dirs path { fill: none; stroke: var(--on-3); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.55; }
+.outlook .lnode { fill: #f4ddca; stroke: var(--ink); stroke-width: 2.5; }
+.outlook .lnode.ne { fill: var(--terra-300); }
+.outlook .lnode.sw { fill: var(--green-300); }
+.outlook .loop-tail { fill: none; stroke: url(#cometG); stroke-width: 4; stroke-linecap: round; }
+.outlook .loop-head { fill: #f6e3d2; filter: drop-shadow(0 0 8px rgba(224, 161, 131, 0.95)); }
+.outlook .loop-orbit { transform-box: view-box; transform-origin: 200px 200px; animation: loopspin 7.5s linear infinite; }
+@keyframes loopspin { to { transform: rotate(360deg); } }
+
+.outlook .loop-center { position: absolute; inset: 0; display: grid; place-content: center; }
+.outlook .loop-node { position: absolute; width: 152px; display: flex; flex-direction: column; gap: 3px; }
+.outlook .loop-node .ln-n { font-family: var(--mono); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; color: var(--terra-300); font-variant-numeric: tabular-nums; }
+.outlook .loop-node .ln-t { font-size: 1.06rem; font-weight: 800; letter-spacing: -0.02em; color: var(--on); }
+.outlook .loop-node .ln-s { font-size: 0.78rem; line-height: 1.4; color: var(--on-3); }
+.outlook .n-nw { top: 2%; left: -8%; text-align: left; align-items: flex-start; }
+.outlook .n-ne { top: 2%; right: -8%; text-align: right; align-items: flex-end; }
+.outlook .n-se { bottom: 2%; right: -8%; text-align: right; align-items: flex-end; }
+.outlook .n-sw { bottom: 2%; left: -8%; text-align: left; align-items: flex-start; }
+
+/* ============================================================
+   reveal primitives
+   ============================================================ */
+.outlook .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.outlook .reveal.in { opacity: 1; transform: none; }
+.outlook .reveal.d1 { transition-delay: 0.08s; }
+.outlook .reveal.d2 { transition-delay: 0.16s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .outlook .reveal { opacity: 1; transform: none; transition: none; }
+  .outlook .climb .fill, .outlook .climb .riser, .outlook .climb .node, .outlook .climb .drop, .outlook .climb .cap { transition: none; opacity: 1; transform: none; }
+  .outlook .climb .fill, .outlook .climb .riser { transform: scaleY(1); }
+  .outlook .step.apex .node::after { animation: none; }
+  .outlook .flow-dot { display: none; }
+  .outlook .loop-orbit { animation: none; }
+}
+
+/* ============================================================
+   responsive
+   ============================================================ */
+@media (max-width: 900px) {
+  .outlook .lede-grid { grid-template-columns: 1fr; gap: 38px; align-items: start; }
+  .outlook .lede-ladder { max-width: 340px; }
+  .outlook .flowband { grid-template-columns: 1fr; }
+  .outlook .fb-in, .outlook .fb-out { border-left: none; border-top: 4px solid var(--green); }
+  .outlook .fb-out { border-top-color: var(--terra); }
+  .outlook .proc { grid-template-columns: repeat(4, 1fr); row-gap: 30px; }
+  .outlook .proc::before, .outlook .flow-dot { display: none; }
+}
+
+@media (max-width: 720px) {
+  .outlook .plot { height: auto; padding: 0; }
+  .outlook .tiers, .outlook .xaxis { display: none; }
+  .outlook .steps { position: static; display: flex; flex-direction: column; gap: 0; }
+  .outlook .step { height: auto; border-left: 2.5px solid var(--acc); padding: 18px 0 18px 22px; }
+  .outlook .step .fill, .outlook .step .riser, .outlook .step .drop { display: none; }
+  .outlook .step .node { left: 0; bottom: auto; top: 24px; transform: translate(-50%, 0); }
+  .outlook .step .cap { position: static; width: 100%; opacity: 1; transform: none; }
+  .outlook .proc { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .outlook .loop-fig { width: min(80vw, 300px); margin: 40px auto; }
+  .outlook .loop-node { width: 33vw; max-width: 150px; }
+  .outlook .loop-node .ln-s { display: none; }
+  .outlook .n-nw, .outlook .n-ne { top: -2%; }
+  .outlook .n-sw, .outlook .n-se { bottom: -2%; }
+}

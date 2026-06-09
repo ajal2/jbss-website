@@ -12,9 +12,10 @@ export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const navItems = livePages();
 
-  // The Outlook page is a dark / atmospheric "briefing room"; the shared nav
-  // restyles dark on that route so it belongs to the page.
-  const isDark = pathname.startsWith("/outlook");
+  // Outlook is now light-hybrid (its dark panels sit below the fold), so the
+  // shared nav stays light on every route. Kept as a flag in case a future
+  // route wants the dark treatment.
+  const isDark = false;
 
   useEffect(() => {
     const onScroll = () => setElevated(window.scrollY > 12);
