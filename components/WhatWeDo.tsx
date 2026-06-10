@@ -1,15 +1,14 @@
-import type { Project } from "@/lib/cms";
+import Image from "next/image";
+import { getVisibleProjects, type Project } from "@/lib/cms";
+import { formatNumber } from "@/lib/format";
+import { SheetHead, AtlasFooter } from "@/components/Atlas";
 
 type Props = {
   projects: Project[];
 };
 
-function fmt(n: number): string {
-  return new Intl.NumberFormat("en-IN").format(Math.round(n));
-}
-
 export function WhatWeDo({ projects }: Props) {
-  const visible = projects.filter((p) => p.visibleOnWebsite);
+  const visible = getVisibleProjects(projects);
   const tpdCnd =
     visible
       .filter((p) => p.businessLine === "C&D")
@@ -21,13 +20,7 @@ export function WhatWeDo({ projects }: Props) {
   return (
     <section id="what" className="pad-section scroll-mt-[100px]">
       <div className="container-x">
-        {/* Eyebrow row with rule */}
-        <div className="mb-[22px] flex items-center gap-3">
-          <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-tx-faint">
-            What we do
-          </span>
-          <span className="h-px flex-1 bg-line" />
-        </div>
+        <SheetHead label="What we do" index="02" />
 
         <div className="max-w-[62ch]">
           <h2 className="text-h1 text-ink">
@@ -44,11 +37,12 @@ export function WhatWeDo({ projects }: Props) {
           <article className="reveal flex flex-col overflow-hidden rounded-md border border-line bg-card">
             <div className="h-1 w-full bg-terra" />
             <div className="relative aspect-[16/10]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/capabilities/C&D_Plant.jpg"
                 alt="JBSS C&D plant processing line"
-                className="absolute inset-0 h-full w-full object-cover"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
               />
             </div>
             <div className="flex flex-1 flex-col gap-4 p-[clamp(22px,2.5vw,34px)]">
@@ -80,7 +74,7 @@ export function WhatWeDo({ projects }: Props) {
               </div>
               <div className="mt-auto flex items-baseline gap-2.5 border-t border-line pt-[18px]">
                 <span className="text-2xl font-extrabold tracking-[-0.03em] tabular-nums text-terra-700">
-                  {fmt(tpdCnd)}
+                  {formatNumber(tpdCnd)}
                 </span>
                 <span className="font-mono text-[0.72rem] uppercase tracking-[0.08em] text-tx-faint">
                   TPD installed
@@ -93,11 +87,12 @@ export function WhatWeDo({ projects }: Props) {
           <article className="reveal flex flex-col overflow-hidden rounded-md border border-line bg-card">
             <div className="h-1 w-full bg-green" />
             <div className="relative aspect-[16/10]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/capabilities/swm.jpg"
                 alt="JBSS sanitation crew loading collected waste"
-                className="absolute inset-0 h-full w-full object-cover"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
               />
             </div>
             <div className="flex flex-1 flex-col gap-4 p-[clamp(22px,2.5vw,34px)]">
@@ -138,6 +133,7 @@ export function WhatWeDo({ projects }: Props) {
             </div>
           </article>
         </div>
+        <AtlasFooter section="Two business lines" note="EPC · EPC + O&M" />
       </div>
     </section>
   );

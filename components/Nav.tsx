@@ -12,9 +12,8 @@ export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const navItems = livePages();
 
-  // Outlook is now light-hybrid (its dark panels sit below the fold), so the
-  // shared nav stays light on every route. Kept as a flag in case a future
-  // route wants the dark treatment.
+  // The nav stays light on every route. Kept as a flag in case a future route
+  // wants a dark treatment.
   const isDark = false;
 
   useEffect(() => {

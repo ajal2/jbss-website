@@ -10,6 +10,7 @@ import {
 } from "react-simple-maps";
 import { useMemo, useState } from "react";
 import type { Project } from "@/lib/cms";
+import { deriveStateName } from "@/lib/location";
 
 // India-recognized state boundaries — includes PoK + Aksai Chin as part of
 // India, full extent of Arunachal Pradesh. NEVER replace with world-atlas /
@@ -42,21 +43,6 @@ type Pin = {
   serviceModel?: string;
 };
 
-function deriveState(cityName?: string): string | undefined {
-  if (!cityName) return undefined;
-  const parts = cityName
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
-  if (!parts.length) return undefined;
-  const last = parts[parts.length - 1];
-  const raw =
-    last.toLowerCase() === "india" && parts.length >= 2
-      ? parts[parts.length - 2]
-      : last;
-  return raw === "New Delhi" ? "Delhi" : raw;
-}
-
 function buildPins(projects: Project[]): Pin[] {
   const pins: Pin[] = [];
   for (const p of projects) {
@@ -69,7 +55,7 @@ function buildPins(projects: Project[]): Pin[] {
       name: p.displayName || p.projectName,
       capacity: p.capacityHeadline,
       city: p.city?.name?.split(",")[0]?.trim(),
-      state: deriveState(p.city?.name),
+      state: deriveStateName(p.city?.name),
       lat,
       lng,
       isCnd: p.businessLine === "C&D",
@@ -133,9 +119,12 @@ export function FootprintMap({ projects }: Props) {
         {/* Head */}
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <div className="mb-[22px] flex items-center gap-3">
+            <div className="mb-[22px] flex items-center gap-3.5">
               <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-tx-faint">
                 Geographic footprint
+              </span>
+              <span className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-tx-faint/70">
+                Sheet 05/06
               </span>
             </div>
             <h2 className="text-h1 text-ink">

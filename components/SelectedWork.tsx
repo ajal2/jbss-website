@@ -1,12 +1,13 @@
 import Link from "next/link";
-import type { Project } from "@/lib/cms";
+import { getVisibleProjects, type Project } from "@/lib/cms";
+import { Ticks } from "@/components/Atlas";
 
 type Props = {
   projects: Project[];
 };
 
 export function SelectedWork({ projects }: Props) {
-  const visible = projects.filter((p) => p.visibleOnWebsite);
+  const visible = getVisibleProjects(projects);
   // Up to 3 featured projects; fall back to ordering by `order` if fewer than 3 featured
   const featured = visible.filter((p) => p.featured);
   const picked = (
@@ -25,9 +26,12 @@ export function SelectedWork({ projects }: Props) {
       <div className="container-x">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <div className="mb-[22px] flex items-center gap-3">
+            <div className="mb-[22px] flex items-center gap-3.5">
               <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-tx-faint">
                 Selected work
+              </span>
+              <span className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-tx-faint/70">
+                Sheet 04/06
               </span>
             </div>
             <h2 className="text-h1 text-ink">What we build and run.</h2>
@@ -76,20 +80,30 @@ export function SelectedWork({ projects }: Props) {
                     <img
                       src={cover}
                       alt={`${title}, JBSS ${p.businessLine ?? ""} project site`.trim()}
+                      loading="lazy"
                       className="absolute inset-0 h-full w-full object-cover"
                     />
                   ) : (
+                    /* No site photo on file — render a drafted spec plate so
+                       the gap reads as intentional, not broken. */
                     <div
                       aria-hidden
-                      className="absolute inset-0 grid place-items-center p-4"
-                      style={{
-                        background:
-                          "repeating-linear-gradient(45deg, rgba(32,37,31,.05) 0 10px, transparent 10px 20px), var(--mist)",
-                      }}
+                      className="survey-grid absolute inset-0 grid place-items-center overflow-hidden bg-mist"
                     >
-                      <span className="font-mono text-[0.72rem] uppercase tracking-[0.08em] text-tx-faint">
-                        ▭ Project photo
-                      </span>
+                      <Ticks tone="light" />
+                      <div className="relative text-center">
+                        <div
+                          className={`font-mono text-[clamp(2rem,4.4vw,2.9rem)] font-bold leading-none tracking-[-0.02em] ${
+                            isCnd ? "text-terra-700/25" : "text-green-700/25"
+                          }`}
+                        >
+                          {p.businessLine ?? "JBSS"}
+                        </div>
+                        <div className="mt-3.5 font-mono text-[0.56rem] uppercase tracking-[0.2em] text-tx-faint">
+                          {p.city?.name?.split(",")[0]?.trim() ?? "JBSS LLP"}
+                          {" · No site photo"}
+                        </div>
+                      </div>
                     </div>
                   )}
                   <div
@@ -171,7 +185,7 @@ export function SelectedWork({ projects }: Props) {
           })}
         </div>
 
-        <div className="mt-[clamp(24px,3vw,36px)] border-t border-line pt-5">
+        <div className="mt-[clamp(24px,3vw,36px)] flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-line pt-5">
           <Link
             href="/projects"
             className="group inline-flex items-center gap-2.5 border-b-2 border-terra pb-[3px] font-semibold text-ink"
@@ -181,6 +195,10 @@ export function SelectedWork({ projects }: Props) {
               →
             </span>
           </Link>
+          <span className="font-mono text-[0.6rem] uppercase tracking-[0.16em] tabular-nums text-tx-faint">
+            <span className="opacity-55">JBSS LLP · </span>Selected work
+            <span className="opacity-55"> · 2026</span>
+          </span>
         </div>
       </div>
     </section>

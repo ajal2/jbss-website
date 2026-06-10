@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { Client } from "@notionhq/client";
 import type {
   PageObjectResponse,
@@ -31,17 +32,19 @@ export async function getProjects(): Promise<Project[]> {
   return fetchProjectsFromNotion();
 }
 
-async function fetchProjectsFromNotion(): Promise<Project[]> {
-  const apiKey = process.env.NOTION_API_KEY;
-  const databaseId = process.env.NOTION_DATABASE_ID;
+/** Publish gate shared by every consumer of the projects list. */
+export const getVisibleProjects = (projects: Project[]): Project[] =>
+  projects.filter((p) => p.visibleOnWebsite);
 
-  if (!apiKey || !databaseId) {
-    throw new Error(
-      "NOTION_API_KEY and NOTION_DATABASE_ID must be set in .env.local",
-    );
+// cache() dedupes the Notion round-trip across all consumers in a single
+// render (the homepage alone fans `projects` out to four sections).
+const fetchProjectsFromNotion = cache(async (): Promise<Project[]> => {
+  const databaseId = process.env.NOTION_DATABASE_ID;
+  if (!databaseId) {
+    throw new Error("NOTION_DATABASE_ID must be set in .env.local");
   }
 
-  const notion = new Client({ auth: apiKey });
+  const notion = notionClient();
   const response = await notion.databases.query({
     database_id: databaseId,
     sorts: [{ property: "Order", direction: "ascending" }],
@@ -50,7 +53,7 @@ async function fetchProjectsFromNotion(): Promise<Project[]> {
   return response.results
     .filter((page): page is PageObjectResponse => "properties" in page)
     .map(notionPageToProject);
-}
+});
 
 function notionPageToProject(page: PageObjectResponse): Project {
   const props = page.properties;
@@ -182,7 +185,7 @@ export async function getJobOpenings(): Promise<JobOpening[]> {
   return fetchJobOpeningsFromNotion();
 }
 
-async function fetchJobOpeningsFromNotion(): Promise<JobOpening[]> {
+const fetchJobOpeningsFromNotion = cache(async (): Promise<JobOpening[]> => {
   const databaseId = process.env.NOTION_CAREERS_DATABASE_ID;
 
   // Graceful no-op until the careers database is wired up, so the page
@@ -210,7 +213,7 @@ async function fetchJobOpeningsFromNotion(): Promise<JobOpening[]> {
     console.error("Failed to load careers from Notion:", err);
     return [];
   }
-}
+});
 
 function notionPageToJob(page: PageObjectResponse): JobOpening {
   const props = page.properties;
@@ -242,12 +245,17 @@ export async function getJobBody(pageId: string): Promise<Block[]> {
   }
 }
 
+// One client per server process, shared by the projects + careers fetchers.
+let notionSingleton: Client | null = null;
+
 function notionClient(): Client {
+  if (notionSingleton) return notionSingleton;
   const apiKey = process.env.NOTION_API_KEY;
   if (!apiKey) {
     throw new Error("NOTION_API_KEY must be set in .env.local");
   }
-  return new Client({ auth: apiKey });
+  notionSingleton = new Client({ auth: apiKey });
+  return notionSingleton;
 }
 
 function readUrl(prop: Property | undefined): string | undefined {

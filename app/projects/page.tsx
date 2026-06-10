@@ -1,12 +1,14 @@
-import { getProjects } from "@/lib/cms";
+import { getProjects, getVisibleProjects } from "@/lib/cms";
 import { ProjectsTable } from "@/components/ProjectsTable";
 import { RevealObserver } from "@/components/RevealOnScroll";
+import { Stat } from "@/components/Stat";
+import { SurveyField } from "@/components/Atlas";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default async function ProjectsPage() {
   const projects = await getProjects();
-  const visible = projects.filter((p) => p.visibleOnWebsite);
+  const visible = getVisibleProjects(projects);
 
   // Stats for the page header
   const total = visible.length;
@@ -20,8 +22,9 @@ export default async function ProjectsPage() {
   return (
     <>
       {/* Page head (mist) */}
-      <section className="border-b border-line bg-mist">
-        <div className="container-x">
+      <section className="relative overflow-hidden border-b border-line bg-mist">
+        <SurveyField />
+        <div className="relative container-x">
           <div className="flex flex-wrap items-end justify-between gap-7 py-[clamp(40px,6vw,72px)]">
             <div>
               <div className="mb-[22px] flex items-center gap-3">
@@ -49,18 +52,5 @@ export default async function ProjectsPage() {
 
       <RevealObserver />
     </>
-  );
-}
-
-function Stat({ n, label }: { n: number; label: string }) {
-  return (
-    <div>
-      <div className="text-[clamp(1.7rem,2.6vw,2.4rem)] font-extrabold leading-none tracking-[-0.03em] tabular-nums text-ink">
-        {n}
-      </div>
-      <div className="mt-2 font-mono text-[0.68rem] uppercase tracking-[0.12em] text-tx-faint">
-        {label}
-      </div>
-    </div>
   );
 }

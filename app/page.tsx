@@ -8,7 +8,9 @@ import { FootprintMap } from "@/components/FootprintMap";
 import { ContactCTA } from "@/components/ContactCTA";
 import { RevealObserver } from "@/components/RevealOnScroll";
 
-export const dynamic = "force-dynamic";
+// Static render, regenerated hourly — Notion edits surface within the window
+// instead of every visitor hitting the API.
+export const revalidate = 3600;
 
 export default async function Home() {
   const projects = await getProjects();

@@ -1,4 +1,7 @@
-import type { Project } from "@/lib/cms";
+import { getVisibleProjects, type Project } from "@/lib/cms";
+import { formatNumber } from "@/lib/format";
+import { deriveStateName } from "@/lib/location";
+import { SheetHead, AtlasFooter, SurveyField } from "@/components/Atlas";
 
 const FOUNDING_YEAR = 2016;
 
@@ -6,27 +9,8 @@ type Props = {
   projects: Project[];
 };
 
-function deriveState(cityName?: string): string | undefined {
-  if (!cityName) return undefined;
-  const parts = cityName
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
-  if (!parts.length) return undefined;
-  const last = parts[parts.length - 1];
-  const raw =
-    last.toLowerCase() === "india" && parts.length >= 2
-      ? parts[parts.length - 2]
-      : last;
-  return raw === "New Delhi" ? "Delhi" : raw;
-}
-
-function fmt(n: number): string {
-  return new Intl.NumberFormat("en-IN").format(Math.round(n));
-}
-
 export function MetricsBand({ projects }: Props) {
-  const visible = projects.filter((p) => p.visibleOnWebsite);
+  const visible = getVisibleProjects(projects);
 
   const yearsOperating = new Date().getFullYear() - FOUNDING_YEAR;
 
@@ -47,7 +31,7 @@ export function MetricsBand({ projects }: Props) {
   visible.forEach((p) => {
     const first = p.city?.name?.split(",")[0]?.trim();
     if (first) cities.add(first);
-    const st = deriveState(p.city?.name);
+    const st = deriveStateName(p.city?.name);
     if (st) states.add(st);
   });
 
@@ -61,7 +45,7 @@ export function MetricsBand({ projects }: Props) {
     },
     {
       tick: "var(--terra-300)",
-      n: fmt(tpdCnd),
+      n: formatNumber(tpdCnd),
       plus: false,
       l1: "TPD C&D capacity",
       l2: "installed",
@@ -83,8 +67,12 @@ export function MetricsBand({ projects }: Props) {
   ];
 
   return (
-    <section className="relative border-t border-line-dk bg-ink-2 text-white">
-      <div className="mx-auto max-w-container">
+    <section className="relative overflow-hidden border-t border-line-dk bg-ink-2 text-white">
+      <SurveyField tone="dark" />
+      <div className="relative mx-auto max-w-container">
+        <div className="px-[var(--gutter)] pt-[clamp(28px,3.4vw,46px)]">
+          <SheetHead label="Key figures" index="01" tone="dark" />
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-4">
           {items.map((item, idx) => (
             <div
@@ -118,6 +106,13 @@ export function MetricsBand({ projects }: Props) {
               </div>
             </div>
           ))}
+        </div>
+        <div className="px-[var(--gutter)] pb-[clamp(26px,3vw,42px)]">
+          <AtlasFooter
+            section="Key figures"
+            note="Operating since 2016 · Gurgaon, Haryana"
+            tone="dark"
+          />
         </div>
       </div>
     </section>

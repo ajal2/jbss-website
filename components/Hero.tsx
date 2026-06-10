@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -41,12 +42,14 @@ export function Hero() {
       {/* Rotating backdrop — crossfade between field photos */}
       <div aria-hidden className="absolute inset-0">
         {SLIDES.map((s, i) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             key={s.src}
             src={s.src}
             alt=""
-            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-in-out"
+            fill
+            sizes="100vw"
+            priority={i === 0}
+            className="object-cover transition-opacity duration-[1200ms] ease-in-out"
             style={{ opacity: i === active ? 1 : 0 }}
           />
         ))}
@@ -99,13 +102,17 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Hero credit, bottom right — tracks the active slide */}
-      <p
-        className="absolute bottom-4 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-white/50"
-        style={{ right: "var(--gutter)" }}
-      >
-        {SLIDES[active].credit}
-      </p>
+      {/* Atlas baseline — datum strip grounding the cover plate */}
+      <div className="container-x relative">
+        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-white/15 py-3.5 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-white/50">
+          <span className="flex flex-wrap items-center gap-x-3.5 gap-y-1 tabular-nums">
+            <span>Est. 2016</span>
+            <span className="text-white/25">·</span>
+            <span>28.47°N 77.03°E · Gurgaon, Haryana</span>
+          </span>
+          <span className="text-white/40">{SLIDES[active].credit}</span>
+        </div>
+      </div>
     </section>
   );
 }

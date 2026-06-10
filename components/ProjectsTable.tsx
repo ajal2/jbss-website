@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { Project } from "@/lib/cms";
+import { deriveStateName } from "@/lib/location";
 
 type Props = {
   projects: Project[];
@@ -30,21 +31,6 @@ function extractYear(s?: string): number | null {
   return Number.isNaN(y) ? null : y;
 }
 
-function deriveStateName(cityName?: string): string {
-  if (!cityName) return "—";
-  const parts = cityName
-    .split(",")
-    .map((p) => p.trim())
-    .filter(Boolean);
-  if (!parts.length) return "—";
-  const last = parts[parts.length - 1];
-  const raw =
-    last.toLowerCase() === "india" && parts.length >= 2
-      ? parts[parts.length - 2]
-      : last;
-  return raw === "New Delhi" ? "Delhi" : raw;
-}
-
 function buildRows(projects: Project[]): Row[] {
   return projects
     .filter((p) => p.visibleOnWebsite)
@@ -58,7 +44,7 @@ function buildRows(projects: Project[]): Row[] {
         status === "Ongoing" ? "ongoing" : status === "Completed" ? "completed" : "other";
       const cityFull = p.city?.name ?? "";
       const cityFirst = cityFull.split(",")[0]?.trim() ?? "—";
-      const state = deriveStateName(cityFull);
+      const state = deriveStateName(cityFull) ?? "—";
       const capDisplay = p.capacityHeadline ?? "—";
       // Numeric capacity for sorting:
       //   C&D → TPD (kg/day / 1000)

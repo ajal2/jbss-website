@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { SheetHead, AtlasFooter, SurveyField } from "@/components/Atlas";
 
 const STEPS = [
   {
@@ -89,16 +90,11 @@ export function CapabilitiesPipeline() {
   return (
     <section
       id="capabilities"
-      className="bg-ink text-white scroll-mt-[100px]"
+      className="relative overflow-hidden bg-ink text-white scroll-mt-[100px]"
     >
-      <div className="container-x py-[clamp(48px,6vw,88px)]">
-        {/* Eyebrow row */}
-        <div className="mb-[22px] flex items-center gap-3">
-          <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-terra-300">
-            Capabilities
-          </span>
-          <span className="h-px flex-1 bg-line-dk" />
-        </div>
+      <SurveyField tone="dark" />
+      <div className="relative container-x py-[clamp(48px,6vw,88px)]">
+        <SheetHead label="Capabilities" index="03" tone="dark" accent="terra" />
 
         <div className="max-w-[62ch]">
           <h2 className="text-h1 text-white">
@@ -226,6 +222,11 @@ export function CapabilitiesPipeline() {
             pipeline, up to 15 years
           </div>
         </div>
+        <AtlasFooter
+          section="Capabilities"
+          note="One pipeline · two contracts"
+          tone="dark"
+        />
       </div>
     </section>
   );

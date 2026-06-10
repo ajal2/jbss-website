@@ -1,12 +1,15 @@
 import Link from "next/link";
+import { SheetHead, AtlasFooter, SurveyField } from "@/components/Atlas";
 
 export function ContactCTA() {
   return (
     <section
       id="contact"
-      className="bg-ink pad-section text-white scroll-mt-[100px]"
+      className="relative overflow-hidden bg-ink pad-section text-white scroll-mt-[100px]"
     >
-      <div className="container-x">
+      <SurveyField tone="dark" />
+      <div className="relative container-x">
+        <SheetHead label="Get in touch" index="06" tone="dark" accent="green" />
         <div className="grid grid-cols-1 items-center gap-[clamp(26px,4vw,52px)] md:grid-cols-[1.3fr_1fr]">
           <div className="reveal">
             <h2 className="text-h1 text-white">
@@ -78,6 +81,11 @@ export function ContactCTA() {
             </ul>
           </div>
         </div>
+        <AtlasFooter
+          section="Contact"
+          note="Public sector · institutions · private"
+          tone="dark"
+        />
       </div>
     </section>
   );

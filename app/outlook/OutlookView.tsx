@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import "./outlook.css";
+import { SheetHead, AtlasFooter, SurveyField, Ticks } from "@/components/Atlas";
 
 // Inline CSS custom properties (--h, --w, --i …) typed for React.
 const v = (vars: Record<string, string | number>): React.CSSProperties =>
@@ -123,13 +124,14 @@ export function OutlookView() {
           <div className="container-x">
             <div className="lede-grid">
               <div className="lede-text">
-                <p className="eyebrow-row">
-                  <span className="eyebrow">Outlook · Market direction</span>
-                  <span className="rule" />
-                </p>
+                <SheetHead
+                  label="Outlook · Market direction"
+                  index="01"
+                  total={4}
+                  accent="terra"
+                />
                 <h1 className="lede-h1 reveal">
-                  India&apos;s waste rules now require what we already build and
-                  operate.
+                  India&apos;s waste rules now mandate what we build and operate.
                 </h1>
                 <p className="lede-sub reveal d1">
                   Over the last ten years, the rules for municipal waste and
@@ -154,21 +156,26 @@ export function OutlookView() {
                 </ol>
               </aside>
             </div>
+            <AtlasFooter
+              section="Market direction"
+              note="Guideline → statutory → constitutional · 2016–2026"
+            />
           </div>
         </section>
 
         {/* ===== 02 — THE DIRECTION (dark · rising chart) ===== */}
-        <section className="direction" id="direction">
-          <span className="reg-tick tl" />
-          <span className="reg-tick tr" />
-          <span className="reg-tick bl" />
-          <span className="reg-tick br" />
-          <div className="container-x">
+        <section className="direction overflow-hidden" id="direction">
+          <SurveyField tone="dark" />
+          <Ticks tone="dark" />
+          <div className="container-x relative z-10">
             <div className="dir-head">
-              <p className="eyebrow-row">
-                <span className="eyebrow">The direction</span>
-                <span className="rule" />
-              </p>
+              <SheetHead
+                label="The direction"
+                index="02"
+                total={4}
+                tone="dark"
+                accent="terra"
+              />
               <h2 className="dir-h2 reveal">
                 Ten years, from guideline to constitutional obligation.
               </h2>
@@ -291,6 +298,11 @@ export function OutlookView() {
                 </span>
               </figcaption>
             </figure>
+            <AtlasFooter
+              section="Regulatory direction"
+              note="SWM & C&D Rules 2016–2026 · Supreme Court, Feb 2026"
+              tone="dark"
+            />
           </div>
         </section>
 
@@ -308,10 +320,12 @@ export function OutlookView() {
         <section className="model section" id="model">
           <div className="container-x">
             <div className="model-head">
-              <p className="eyebrow-row">
-                <span className="eyebrow">The model · C&amp;D processing</span>
-                <span className="rule" />
-              </p>
+              <SheetHead
+                label="The model · C&D processing"
+                index="03"
+                total={4}
+                accent="green"
+              />
               <h2 className="model-h2 reveal">From rubble to graded aggregate.</h2>
               <p className="model-sub reveal d1">
                 What a C&amp;D plant does. Demolition waste goes in, building
@@ -425,71 +439,70 @@ export function OutlookView() {
                 <span className="fb-sub">Aggregate · M-sand · paver blocks</span>
               </div>
             </div>
+            <AtlasFooter
+              section="C&D processing line"
+              note="Seven stages · mixed C&D in, graded material out"
+            />
           </div>
         </section>
 
-        {/* ===== CLOSING — the material loop (dark) ===== */}
-        <section className="closing" id="loop">
-          <span className="reg-tick tl" />
-          <span className="reg-tick tr" />
-          <span className="reg-tick bl" />
-          <span className="reg-tick br" />
-          <div className="container-x">
+        {/* ===== CLOSING — output destinations (dark) ===== */}
+        <section className="closing overflow-hidden" id="loop">
+          <SurveyField tone="dark" />
+          <Ticks tone="dark" />
+          <div className="container-x relative z-10">
+            <SheetHead
+              label="Output · End use"
+              index="04"
+              total={4}
+              tone="dark"
+              accent="terra"
+            />
             <div className="loop-head">
-              <h2 className="loop-h2 reveal">The material keeps moving.</h2>
+              <h2 className="loop-h2 reveal">
+                Where the recovered material goes.
+              </h2>
+              <p className="loop-sub reveal d1">
+                Graded output from the line is specified back into the works it
+                came from — road sub-base, ready-mix concrete and paver blocks.
+              </p>
             </div>
 
-            <div className="loop-fig reveal d1">
-              <svg
-                className="loop-svg"
-                viewBox="0 0 400 400"
-                aria-label="A continuous loop: material in use, then demolition, then processing, then recovered material, and back into use."
-              >
-                <defs>
-                  <linearGradient id="cometG" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="360" y2="360">
-                    <stop offset="0" stopColor="#8fbf9c" stopOpacity="0" />
-                    <stop offset="0.55" stopColor="#8fbf9c" />
-                    <stop offset="1" stopColor="#e0a183" />
-                  </linearGradient>
-                </defs>
-                <circle className="loop-track" cx="200" cy="200" r="150" />
-                <g className="loop-dirs">
-                  <path d="M-4 -5 L3 0 L-4 5" transform="translate(200 50) rotate(0)" />
-                  <path d="M-4 -5 L3 0 L-4 5" transform="translate(350 200) rotate(90)" />
-                  <path d="M-4 -5 L3 0 L-4 5" transform="translate(200 350) rotate(180)" />
-                  <path d="M-4 -5 L3 0 L-4 5" transform="translate(50 200) rotate(270)" />
-                </g>
-                <circle className="lnode" cx="94" cy="94" r="6" />
-                <circle className="lnode ne" cx="306" cy="94" r="6" />
-                <circle className="lnode" cx="306" cy="306" r="6" />
-                <circle className="lnode sw" cx="94" cy="306" r="6" />
-                <g className="loop-orbit">
-                  <path className="loop-tail" d="M52 174 A150 150 0 0 1 200 50" />
-                  <circle className="loop-head" cx="200" cy="50" r="8" />
-                </g>
-              </svg>
-              <div className="loop-center" />
-              <div className="loop-node n-nw">
-                <span className="ln-n tnum">01</span>
-                <span className="ln-t">In use</span>
-                <span className="ln-s">Buildings, roads, public works</span>
+            <div className="destinations reveal d1">
+              <div className="dest">
+                <span className="dest-n tnum">01</span>
+                <span className="dest-out">Recycled aggregate</span>
+                <span className="dest-to">
+                  Road sub-base, embankment and structural fill
+                </span>
               </div>
-              <div className="loop-node n-ne">
-                <span className="ln-n tnum">02</span>
-                <span className="ln-t">Demolition</span>
-                <span className="ln-s">Debris and rubble generated</span>
+              <div className="dest">
+                <span className="dest-n tnum">02</span>
+                <span className="dest-out">Manufactured sand (M-sand)</span>
+                <span className="dest-to">
+                  Ready-mix concrete, mortar and plaster
+                </span>
               </div>
-              <div className="loop-node n-se">
-                <span className="ln-n tnum">03</span>
-                <span className="ln-t">Processing</span>
-                <span className="ln-s">Crush, screen and wash</span>
+              <div className="dest">
+                <span className="dest-n tnum">03</span>
+                <span className="dest-out">Recycled concrete blocks</span>
+                <span className="dest-to">
+                  Paver blocks, kerbstones and boundary walls
+                </span>
               </div>
-              <div className="loop-node n-sw">
-                <span className="ln-n tnum">04</span>
-                <span className="ln-t">Recovered</span>
-                <span className="ln-s">Aggregate, sand, paver blocks</span>
+              <div className="dest">
+                <span className="dest-n tnum">04</span>
+                <span className="dest-out">Inert reject</span>
+                <span className="dest-to">
+                  Engineered landfill cover and low-grade fill
+                </span>
               </div>
             </div>
+            <AtlasFooter
+              section="Recovered material"
+              note="Recycled aggregate · M-sand · paver blocks · inert cover"
+              tone="dark"
+            />
           </div>
         </section>
       </main>

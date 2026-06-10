@@ -1,35 +1,56 @@
 "use client";
 
-// NOTE: functional scaffold — Claude Design to finalize the visual treatment.
-// Structure, data wiring, a11y and the apply logic are production-ready; the
-// styling uses the existing design tokens but is deliberately restrained so it
-// can be elevated in the design pass. See careers-handoff.md.
+import { useState } from "react";
+import Link from "next/link";
+import { applyHref, isExternal } from "@/lib/careers";
+// Types live in lib/cms (the data layer), not lib/careers — rewired from the
+// Claude Design mockup, which assumed they were exported from lib/careers.
+import type { Block, JobWithBody, Span } from "@/lib/cms";
 
-import { useRef, useState } from "react";
-import type { JobWithBody, Block, Span } from "@/lib/cms";
-import { applyHref, isExternal, CAREERS_EMAIL } from "@/lib/careers";
+type Props = {
+  jobs: JobWithBody[];
+};
 
-export function CareersList({ jobs }: { jobs: JobWithBody[] }) {
-  // Auto-open when there's a single role; otherwise start collapsed.
+export function CareersList({ jobs }: Props) {
+  // Single open role → start expanded (kept from the original behavior);
+  // otherwise everything starts closed, one drawer open at a time.
   const [openId, setOpenId] = useState<string | null>(
-    jobs.length === 1 ? jobs[0].id : null,
+    jobs.length === 1 ? jobs[0].id : null
   );
 
-  if (jobs.length === 0) return <EmptyState />;
+  if (jobs.length === 0) return <CareersEmpty />;
 
   return (
-    <ul className="border-t-2 border-ink">
-      {jobs.map((job) => (
-        <JobRow
-          key={job.id}
-          job={job}
-          open={openId === job.id}
-          onToggle={() => setOpenId((curr) => (curr === job.id ? null : job.id))}
-        />
-      ))}
-    </ul>
+    <div className="careers-list">
+      {/* Column header — echoes the projects table thead; hidden <760px */}
+      <div className="clist-head" aria-hidden="true">
+        <span>Role</span>
+        <span>Department</span>
+        <span>Type</span>
+        <span>Location</span>
+      </div>
+
+      <ul className="m-0 list-none p-0">
+        {jobs.map((job) => (
+          <JobRow
+            key={job.id}
+            job={job}
+            open={openId === job.id}
+            onToggle={() =>
+              setOpenId((curr) => (curr === job.id ? null : job.id))
+            }
+          />
+        ))}
+      </ul>
+
+      <p className="mt-[22px] max-w-[60ch] text-[0.9375rem] text-tx-faint">
+        Select a role for the full description.
+      </p>
+    </div>
   );
 }
+
+// === Row + drawer ===
 
 function JobRow({
   job,
@@ -40,56 +61,66 @@ function JobRow({
   open: boolean;
   onToggle: () => void;
 }) {
-  const drawerRef = useRef<HTMLDivElement>(null);
-  const panelId = `job-panel-${job.id}`;
+  const href = applyHref(job);
+  const ext = isExternal(href);
+  const rowId = `careers-row-${job.id}`;
+  const drawerId = `careers-drawer-${job.id}`;
 
   return (
     <li className="border-b border-line">
       <button
         type="button"
-        onClick={onToggle}
+        id={rowId}
+        className="crow"
         aria-expanded={open}
-        aria-controls={panelId}
-        className="group flex w-full items-center gap-3 py-[18px] text-left transition-colors hover:opacity-90"
+        aria-controls={drawerId}
+        onClick={onToggle}
       >
-        <span
-          aria-hidden
-          className={`inline-block w-[14px] flex-none text-tx-faint transition-transform ${
-            open ? "rotate-90 text-green-700" : ""
-          }`}
-        >
-          ›
-        </span>
-        <span className="flex-1">
-          <span className="block text-[1.05rem] font-semibold leading-snug text-ink">
-            {job.role}
+        <span className="role">
+          <span className="chev" aria-hidden="true">
+            ›
           </span>
-          <span className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.7rem] uppercase tracking-[0.08em] text-tx-faint">
-            {job.type && <span>{job.type}</span>}
-            {job.location && <span>{job.location}</span>}
-            {job.department && <span>{job.department}</span>}
-          </span>
+          {job.role}
         </span>
-        <span className="hidden flex-none font-mono text-[0.68rem] uppercase tracking-[0.1em] text-tx-faint sm:block">
-          {open ? "Close" : "View"}
+        <span className="meta-line">
+          <span className="dept">{job.department ?? "—"}</span>
+          <span className="sep" aria-hidden="true">
+            ·
+          </span>
+          <span className="ctype">{job.type ?? "—"}</span>
+          <span className="sep" aria-hidden="true">
+            ·
+          </span>
+          <span className="loc">{job.location ?? "—"}</span>
         </span>
       </button>
 
       <div
-        id={panelId}
+        className={open ? "cdrawer open" : "cdrawer"}
+        id={drawerId}
         role="region"
-        className="overflow-hidden transition-[max-height] duration-300 ease-out"
-        style={{ maxHeight: open ? (drawerRef.current?.scrollHeight ?? 2000) : 0 }}
+        aria-labelledby={rowId}
       >
-        <div
-          ref={drawerRef}
-          className="grid gap-x-[clamp(20px,3vw,48px)] gap-y-6 pb-7 pl-[27px] pr-2 pt-1 md:grid-cols-[1.5fr_auto]"
-        >
-          <div className="max-w-[62ch] space-y-3 leading-[1.65] text-tx-soft">
-            <BlockContent blocks={job.body} />
-          </div>
-          <div className="md:pt-1">
-            <ApplyButton job={job} />
+        <div className="cdrawer-clip">
+          <div className="cdrawer-inner">
+            <JobBody blocks={job.body} />
+            <aside className="cmeta">
+              <div className="dl">
+                <Spec k="Department" v={job.department} />
+                <Spec k="Type" v={job.type} />
+                <Spec k="Location" v={job.location} />
+              </div>
+              <a
+                href={href}
+                {...(ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="group inline-flex items-center justify-self-start gap-2.5 rounded border-[1.5px] border-green bg-green px-[22px] py-[13px] text-[0.95rem] font-semibold tracking-[-0.01em] text-white transition-colors hover:border-green-700 hover:bg-green-700 max-[760px]:min-h-[48px] max-[760px]:justify-center max-[760px]:justify-self-stretch"
+              >
+                Apply for this role{" "}
+                <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
+                  →
+                </span>
+              </a>
+            </aside>
           </div>
         </div>
       </div>
@@ -97,121 +128,109 @@ function JobRow({
   );
 }
 
-function ApplyButton({ job }: { job: JobWithBody }) {
-  const href = applyHref(job);
-  const external = isExternal(href);
+function Spec({ k, v }: { k: string; v?: string }) {
   return (
-    <a
-      href={href}
-      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className="inline-flex items-center gap-2 whitespace-nowrap rounded-[4px] border-[1.5px] border-green bg-green px-[22px] py-[13px] text-[0.95rem] font-semibold text-white transition-colors hover:border-green-700 hover:bg-green-700"
-    >
-      Apply <span aria-hidden>→</span>
-    </a>
+    <div>
+      <div className="k">{k}</div>
+      <div className="v">{v ?? "—"}</div>
+    </div>
   );
 }
 
-// === Body rendering (Notion page blocks → JSX) ===
+// === Notion body rendering ===
+// Consecutive bullet/number blocks group into one <ul>/<ol>.
 
-function BlockContent({ blocks }: { blocks: Block[] }) {
-  if (blocks.length === 0) {
-    return (
-      <p className="text-tx-faint">
-        Details coming soon. Reach out at{" "}
-        <a className="underline hover:text-ink" href={`mailto:${CAREERS_EMAIL}`}>
-          {CAREERS_EMAIL}
-        </a>
-        .
-      </p>
-    );
-  }
-
-  // Group consecutive list items into a single <ul>/<ol>.
+function JobBody({ blocks }: { blocks: Block[] }) {
   const out: React.ReactNode[] = [];
   let i = 0;
   while (i < blocks.length) {
     const b = blocks[i];
     if (b.kind === "bullet" || b.kind === "number") {
-      const ordered = b.kind === "number";
+      const kind = b.kind;
       const items: Span[][] = [];
-      while (
-        i < blocks.length &&
-        blocks[i].kind === (ordered ? "number" : "bullet")
-      ) {
+      while (i < blocks.length && blocks[i].kind === kind) {
         items.push(blocks[i].spans);
         i++;
       }
-      const ListTag = ordered ? "ol" : "ul";
+      const ListTag = kind === "bullet" ? "ul" : "ol";
       out.push(
-        <ListTag
-          key={`list-${i}`}
-          className={`${ordered ? "list-decimal" : "list-disc"} space-y-1.5 pl-5`}
-        >
-          {items.map((spans, idx) => (
-            <li key={idx}>
+        <ListTag key={`list-${i}`}>
+          {items.map((spans, j) => (
+            <li key={j}>
               <Spans spans={spans} />
             </li>
           ))}
-        </ListTag>,
-      );
-      continue;
-    }
-
-    if (b.kind === "h2" || b.kind === "h3") {
-      out.push(
-        <h3 key={`h-${i}`} className="text-h3 pt-2 text-ink">
-          <Spans spans={b.spans} />
-        </h3>,
+        </ListTag>
       );
     } else {
+      const Tag = b.kind === "h2" ? "h2" : b.kind === "h3" ? "h3" : "p";
       out.push(
-        <p key={`p-${i}`}>
+        <Tag key={i}>
           <Spans spans={b.spans} />
-        </p>,
+        </Tag>
       );
+      i++;
     }
-    i++;
   }
-
-  return <>{out}</>;
+  return <div className="cbody">{out}</div>;
 }
 
 function Spans({ spans }: { spans: Span[] }) {
   return (
     <>
-      {spans.map((s, i) => {
-        let node: React.ReactNode = s.text;
-        if (s.bold) node = <strong>{node}</strong>;
-        if (s.italic) node = <em>{node}</em>;
-        if (s.href) {
-          node = (
-            <a
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-ink"
-            >
-              {node}
-            </a>
-          );
-        }
-        return <span key={i}>{node}</span>;
-      })}
+      {spans.map((span, i) => (
+        <SpanText key={i} span={span} />
+      ))}
     </>
   );
 }
 
-function EmptyState() {
+function SpanText({ span }: { span: Span }) {
+  let node: React.ReactNode = span.text;
+  if (span.bold) node = <strong>{node}</strong>;
+  if (span.italic) node = <em>{node}</em>;
+  if (span.href) {
+    node = isExternal(span.href) ? (
+      <a href={span.href} target="_blank" rel="noopener noreferrer">
+        {node}
+      </a>
+    ) : (
+      <a href={span.href}>{node}</a>
+    );
+  }
+  return <>{node}</>;
+}
+
+// === Empty state — the common state; quiet, stated, dated ===
+
+function CareersEmpty() {
+  const stamp = new Date().toLocaleDateString("en-IN", {
+    month: "long",
+    year: "numeric",
+  });
   return (
-    <div className="border-t-2 border-ink py-[clamp(40px,7vw,72px)]">
-      <p className="max-w-[52ch] text-lead text-tx-soft">
-        No open roles right now. We&rsquo;re always glad to hear from people who
-        want to help build India&rsquo;s waste infrastructure — write to us at{" "}
-        <a className="underline hover:text-ink" href={`mailto:${CAREERS_EMAIL}`}>
-          {CAREERS_EMAIL}
-        </a>
-        .
+    <div className="careers-empty">
+      <div className="ce-status">
+        <span className="dot" aria-hidden="true"></span>
+        No open roles · <span suppressHydrationWarning>{stamp}</span>
+      </div>
+      <h2>Nothing open right now.</h2>
+      <p>
+        We staff as projects demand. When a role opens, it&apos;s listed on
+        this page first.
       </p>
+      <Link
+        href="/projects"
+        className="group mt-7 inline-flex items-center gap-2.5 whitespace-nowrap border-b-2 border-terra pb-[3px] text-[0.95rem] font-semibold text-ink"
+      >
+        See what we&apos;re building{" "}
+        <span
+          aria-hidden="true"
+          className="text-terra transition-transform group-hover:translate-x-1"
+        >
+          →
+        </span>
+      </Link>
     </div>
   );
 }

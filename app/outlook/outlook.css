@@ -27,21 +27,13 @@
 .outlook ::selection { background: var(--terra); color: #fff; }
 .outlook section[id] { scroll-margin-top: 90px; }
 
-/* ---------- shared primitives (from homepage.css) ---------- */
+/* ---------- shared primitives ---------- */
 .outlook .tnum { font-variant-numeric: tabular-nums; }
-.outlook .eyebrow-row { display: flex; align-items: center; gap: 16px; }
-.outlook .eyebrow {
-  font-family: var(--mono); font-weight: 700; font-size: 0.72rem;
-  letter-spacing: 0.2em; text-transform: uppercase; color: var(--tx-faint);
-  white-space: nowrap;
-}
-.outlook .eyebrow-row .rule { flex: 1; height: 1px; background: var(--line); }
 
 /* ============================================================
    01 — THE ARGUMENT  (light lede)
    ============================================================ */
 .outlook .lede { padding-block: clamp(56px, 9vh, 116px) clamp(48px, 7vh, 92px); }
-.outlook .lede .eyebrow-row { margin-bottom: clamp(26px, 4vh, 46px); }
 .outlook .lede-grid {
   display: grid; grid-template-columns: 1.55fr 1fr; gap: clamp(34px, 5vw, 80px);
   align-items: end;
@@ -82,20 +74,10 @@
   position: relative; background: var(--ink); color: var(--on);
   padding-block: clamp(58px, 8vh, 104px);
   background-image:
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.022) 1px, transparent 0) 0 0/24px 24px,
     radial-gradient(130% 100% at 88% -8%, rgba(224, 161, 131, 0.12), transparent 56%),
     radial-gradient(120% 90% at 4% 112%, rgba(143, 191, 156, 0.08), transparent 54%);
 }
 .outlook .direction ::selection { background: var(--terra-300); color: var(--ink); }
-.outlook .direction .eyebrow { color: var(--terra-300); }
-.outlook .direction .eyebrow-row .rule { background: var(--hair-d); }
-
-/* corner registration ticks */
-.outlook .reg-tick { position: absolute; width: 16px; height: 16px; z-index: 2; pointer-events: none; opacity: 0.5; }
-.outlook .reg-tick.tl { top: 18px; left: 18px; border-top: 1.5px solid var(--on-3); border-left: 1.5px solid var(--on-3); }
-.outlook .reg-tick.tr { top: 18px; right: 18px; border-top: 1.5px solid var(--on-3); border-right: 1.5px solid var(--on-3); }
-.outlook .reg-tick.bl { bottom: 18px; left: 18px; border-bottom: 1.5px solid var(--on-3); border-left: 1.5px solid var(--on-3); }
-.outlook .reg-tick.br { bottom: 18px; right: 18px; border-bottom: 1.5px solid var(--on-3); border-right: 1.5px solid var(--on-3); }
 
 .outlook .dir-head { max-width: 60ch; }
 .outlook .dir-h2 { font-size: var(--step-2); font-weight: 800; letter-spacing: -0.035em; line-height: 1.04; color: var(--on); margin-top: 14px; max-width: 20ch; text-wrap: balance; }
@@ -297,51 +279,37 @@
   position: relative; background: var(--ink); color: var(--on); border-top: none;
   padding-block: clamp(56px, 9vh, 112px);
   background-image:
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.022) 1px, transparent 0) 0 0/24px 24px,
     radial-gradient(110% 90% at 50% -8%, rgba(143, 191, 156, 0.1), transparent 58%),
     radial-gradient(110% 90% at 50% 108%, rgba(224, 161, 131, 0.1), transparent 58%);
 }
 .outlook .closing ::selection { background: var(--terra-300); color: var(--ink); }
 .outlook .loop-head { max-width: 56ch; }
-.outlook .loop-h2 { font-size: var(--step-2); font-weight: 800; letter-spacing: -0.035em; line-height: 1.04; color: var(--on); margin-top: 14px; max-width: 16ch; }
+.outlook .loop-h2 { font-size: var(--step-2); font-weight: 800; letter-spacing: -0.035em; line-height: 1.04; color: var(--on); margin-top: 14px; max-width: 20ch; }
+.outlook .loop-sub { margin-top: 16px; font-size: 1.04rem; line-height: 1.55; color: var(--on-2); max-width: 54ch; }
 
-.outlook .loop-fig { position: relative; width: clamp(300px, 52vw, 540px); aspect-ratio: 1; margin: clamp(64px, 10vh, 116px) auto; }
-.outlook .loop-svg { width: 100%; height: 100%; overflow: visible; display: block; }
-.outlook .loop-track { fill: none; stroke: var(--hair-d); stroke-width: 1.5; }
-.outlook .loop-dirs path { fill: none; stroke: var(--on-3); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.55; }
-.outlook .lnode { fill: #f4ddca; stroke: var(--ink); stroke-width: 2.5; }
-.outlook .lnode.ne { fill: var(--terra-300); }
-.outlook .lnode.sw { fill: var(--green-300); }
-.outlook .loop-tail { fill: none; stroke: url(#cometG); stroke-width: 4; stroke-linecap: round; }
-.outlook .loop-head { fill: #f6e3d2; filter: drop-shadow(0 0 8px rgba(224, 161, 131, 0.95)); }
-.outlook .loop-orbit { transform-box: view-box; transform-origin: 200px 200px; animation: loopspin 7.5s linear infinite; }
-@keyframes loopspin { to { transform: rotate(360deg); } }
-
-.outlook .loop-center { position: absolute; inset: 0; display: grid; place-content: center; }
-.outlook .loop-node { position: absolute; width: 152px; display: flex; flex-direction: column; gap: 3px; }
-.outlook .loop-node .ln-n { font-family: var(--mono); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; color: var(--terra-300); font-variant-numeric: tabular-nums; }
-.outlook .loop-node .ln-t { font-size: 1.06rem; font-weight: 800; letter-spacing: -0.02em; color: var(--on); }
-.outlook .loop-node .ln-s { font-size: 0.78rem; line-height: 1.4; color: var(--on-3); }
-.outlook .n-nw { top: 2%; left: -8%; text-align: left; align-items: flex-start; }
-.outlook .n-ne { top: 2%; right: -8%; text-align: right; align-items: flex-end; }
-.outlook .n-se { bottom: 2%; right: -8%; text-align: right; align-items: flex-end; }
-.outlook .n-sw { bottom: 2%; left: -8%; text-align: left; align-items: flex-start; }
+/* output destinations ledger — replaces the material loop */
+.outlook .destinations {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+  margin-top: clamp(40px, 6vh, 72px);
+  background: var(--hair-d); border: 1px solid var(--hair-d);
+}
+.outlook .dest { background: var(--ink); padding: clamp(22px, 3vw, 34px); display: flex; flex-direction: column; gap: 7px; }
+.outlook .dest-n { font-family: var(--mono); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; color: var(--terra-300); font-variant-numeric: tabular-nums; }
+.outlook .dest-out { font-size: 1.18rem; font-weight: 800; letter-spacing: -0.02em; color: var(--on); }
+.outlook .dest-to { font-size: 0.9rem; line-height: 1.45; color: var(--on-3); }
 
 /* ============================================================
    reveal primitives
    ============================================================ */
-.outlook .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.outlook .reveal.in { opacity: 1; transform: none; }
+/* .reveal + .reveal.in are inherited from globals.css; only the stagger is local */
 .outlook .reveal.d1 { transition-delay: 0.08s; }
 .outlook .reveal.d2 { transition-delay: 0.16s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .outlook .reveal { opacity: 1; transform: none; transition: none; }
   .outlook .climb .fill, .outlook .climb .riser, .outlook .climb .node, .outlook .climb .drop, .outlook .climb .cap { transition: none; opacity: 1; transform: none; }
   .outlook .climb .fill, .outlook .climb .riser { transform: scaleY(1); }
   .outlook .step.apex .node::after { animation: none; }
   .outlook .flow-dot { display: none; }
-  .outlook .loop-orbit { animation: none; }
 }
 
 /* ============================================================
@@ -369,9 +337,5 @@
 }
 
 @media (max-width: 600px) {
-  .outlook .loop-fig { width: min(80vw, 300px); margin: 40px auto; }
-  .outlook .loop-node { width: 33vw; max-width: 150px; }
-  .outlook .loop-node .ln-s { display: none; }
-  .outlook .n-nw, .outlook .n-ne { top: -2%; }
-  .outlook .n-sw, .outlook .n-se { bottom: -2%; }
+  .outlook .destinations { grid-template-columns: 1fr; }
 }

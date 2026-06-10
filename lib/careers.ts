@@ -6,10 +6,10 @@
  * sets its own "Apply Link". Set via NEXT_PUBLIC_CAREERS_FORM_URL so it's
  * inlined into the client bundle. Empty → the button falls back to mailto.
  */
-export const CAREERS_FORM_URL = process.env.NEXT_PUBLIC_CAREERS_FORM_URL ?? "";
+const CAREERS_FORM_URL = process.env.NEXT_PUBLIC_CAREERS_FORM_URL ?? "";
 
 /** Fallback contact when no form URL is configured. Matches the site's contact email. */
-export const CAREERS_EMAIL = "aryanjalota@jbssgroup.com";
+const CAREERS_EMAIL = "aryanjalota@jbssgroup.com";
 
 /**
  * Resolve where a job's Apply button should go:
