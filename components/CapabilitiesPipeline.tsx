@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { SheetHead, AtlasFooter, SurveyField } from "@/components/Atlas";
+import { SheetHead, SurveyField } from "@/components/Atlas";
 
 const STEPS = [
   {
@@ -222,11 +222,6 @@ export function CapabilitiesPipeline() {
             pipeline, up to 15 years
           </div>
         </div>
-        <AtlasFooter
-          section="Capabilities"
-          note="One pipeline · two contracts"
-          tone="dark"
-        />
       </div>
     </section>
   );

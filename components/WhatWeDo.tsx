@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getVisibleProjects, type Project } from "@/lib/cms";
 import { formatNumber } from "@/lib/format";
-import { SheetHead, AtlasFooter } from "@/components/Atlas";
+import { SheetHead } from "@/components/Atlas";
 
 type Props = {
   projects: Project[];
@@ -133,7 +133,6 @@ export function WhatWeDo({ projects }: Props) {
             </div>
           </article>
         </div>
-        <AtlasFooter section="Two business lines" note="EPC · EPC + O&M" />
       </div>
     </section>
   );

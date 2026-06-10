@@ -3,102 +3,146 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { livePages } from "@/lib/nav";
-import "./nav.css";
 
 export function Nav() {
   const pathname = usePathname();
-  // The home page has a dark hero, so the transparent (un-scrolled) nav sits
-  // on the photo and needs light links. Other pages have light headers.
-  const onDark = pathname === "/";
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-  const fillRef = useRef<HTMLElement>(null);
+  const [elevated, setElevated] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const navItems = livePages();
 
+  // The nav stays light on every route. Kept as a flag in case a future route
+  // wants a dark treatment.
+  const isDark = false;
+
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 24);
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
-      if (fillRef.current) fillRef.current.style.width = `${pct}%`;
-    };
+    const onScroll = () => setElevated(window.scrollY > 12);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // close the mobile menu when the route changes
-  useEffect(() => setOpen(false), [pathname]);
-
-  const isActive = (href: string) => href !== "/" && pathname.startsWith(href);
-  const navClass = `jbss-nav${scrolled ? " scrolled" : ""}${onDark ? " nav-on-dark" : ""}`;
-
   return (
-    <>
-      <div className="jbss-nav-wrap">
-        <nav className={navClass} aria-label="Main">
-          <Link href="/" className="logo-box" aria-label="JBSS LLP home">
+    <header
+      className="sticky top-0 z-50 border-b backdrop-blur"
+      style={{
+        backgroundColor: isDark
+          ? "color-mix(in srgb, var(--ink) 90%, transparent)"
+          : "color-mix(in srgb, var(--mist) 92%, transparent)",
+        borderColor: isDark ? "rgba(255,255,255,.10)" : "var(--line)",
+        boxShadow: elevated
+          ? "0 10px 30px -22px rgba(32,37,31,.45)"
+          : "none",
+        transition: "box-shadow .25s ease",
+      }}
+    >
+      <div className="container-x">
+        <div className="flex h-[86px] items-center gap-7">
+          <Link
+            href="/"
+            aria-label="JBSS LLP home"
+            className="flex items-center"
+          >
             <Image
               src="/logo.svg"
               alt="JBSS LLP"
-              width={122}
-              height={34}
+              width={180}
+              height={50}
               priority
-              style={{ height: 34, width: "auto" }}
+              className="h-[50px] w-auto"
             />
           </Link>
 
-          <div className="nlinks">
-            {navItems.map((it) => (
-              <Link
-                key={it.href}
-                href={it.href}
-                className={isActive(it.href) ? "active" : undefined}
-              >
-                {it.label}
-              </Link>
-            ))}
-          </div>
+          {/* Desktop nav */}
+          <nav className="ml-2 hidden items-center gap-8 md:flex">
+            {navItems.map((item) => {
+              const isActive =
+                pathname.startsWith(item.href) && item.href !== "/";
+              const linkColor = isDark
+                ? isActive
+                  ? "text-white"
+                  : "text-[#c3c8b9] hover:text-white"
+                : isActive
+                  ? "text-ink"
+                  : "text-tx-soft hover:text-ink";
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`group relative py-1.5 text-[0.95rem] font-medium transition-colors ${linkColor}`}
+                >
+                  {item.label}
+                  <span
+                    aria-hidden
+                    className={`absolute -bottom-0 left-0 h-[2px] bg-terra transition-all duration-200 ease-out ${
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  />
+                </Link>
+              );
+            })}
+          </nav>
 
-          <span className="spacer" />
+          <span className="ml-auto" />
 
-          <Link href="/#contact" className="ctabtn">
-            Discuss a project <span className="arr">→</span>
+          {/* Discuss a project (desktop) */}
+          <Link
+            href="/#contact"
+            className="hidden items-center gap-2.5 rounded-[4px] border-[1.5px] border-green bg-green px-[22px] py-[13px] text-[0.95rem] font-semibold text-white transition-colors hover:border-green-700 hover:bg-green-700 md:inline-flex"
+          >
+            Discuss a project
+            <span className="transition-transform duration-200 group-hover:translate-x-1">
+              →
+            </span>
           </Link>
 
+          {/* Mobile menu button */}
           <button
             type="button"
-            className="menu-btn"
-            aria-expanded={open}
             aria-label="Menu"
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => setMobileOpen((v) => !v)}
+            className={`ml-auto inline-flex items-center gap-2 rounded-[4px] border-[1.5px] px-[22px] py-[13px] text-[0.95rem] font-semibold md:hidden ${
+              isDark
+                ? "border-[rgba(255,255,255,.18)] text-[#f1efe6]"
+                : "border-line text-ink"
+            }`}
           >
-            {open ? "Close" : "Menu"}
+            {mobileOpen ? "Close" : "Menu"}
           </button>
-
-          <span className="jbss-nav-progress" aria-hidden>
-            <i ref={fillRef} />
-          </span>
-        </nav>
-
-        <div className={`jbss-nav-mobile${open ? " open" : ""}`}>
-          {navItems.map((it) => (
-            <Link key={it.href} href={it.href} onClick={() => setOpen(false)}>
-              {it.label}
-            </Link>
-          ))}
-          <Link href="/#contact" onClick={() => setOpen(false)}>
-            Discuss a project →
-          </Link>
         </div>
-      </div>
 
-      {/* The nav is fixed/floating. On the home page it sits over the dark hero
-          (no spacer). Other pages have light headers, so reserve the nav's
-          height here — keeping the page layouts exactly as before. */}
-      {!onDark && <div aria-hidden style={{ height: 86, flexShrink: 0 }} />}
-    </>
+        {/* Mobile dropdown */}
+        {mobileOpen && (
+          <nav
+            className={`flex flex-col items-start gap-1 border-t py-4 md:hidden ${
+              isDark ? "border-[rgba(255,255,255,.10)]" : "border-line"
+            }`}
+          >
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className={`w-full py-2 text-[1rem] font-medium ${
+                  isDark
+                    ? "text-[#c3c8b9] hover:text-white"
+                    : "text-tx-soft hover:text-ink"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link
+              href="/#contact"
+              onClick={() => setMobileOpen(false)}
+              className="mt-2 inline-flex items-center gap-2 rounded-[4px] bg-green px-5 py-3 text-[0.95rem] font-semibold text-white"
+            >
+              Discuss a project →
+            </Link>
+          </nav>
+        )}
+      </div>
+    </header>
   );
 }

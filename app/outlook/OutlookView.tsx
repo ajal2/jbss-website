@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import "./outlook.css";
-import { SheetHead, AtlasFooter, SurveyField, Ticks } from "@/components/Atlas";
+import { SheetHead, SurveyField, Ticks } from "@/components/Atlas";
 
 // Inline CSS custom properties (--h, --w, --i …) typed for React.
 const v = (vars: Record<string, string | number>): React.CSSProperties =>
@@ -156,10 +156,6 @@ export function OutlookView() {
                 </ol>
               </aside>
             </div>
-            <AtlasFooter
-              section="Market direction"
-              note="Guideline → statutory → constitutional · 2016–2026"
-            />
           </div>
         </section>
 
@@ -298,11 +294,6 @@ export function OutlookView() {
                 </span>
               </figcaption>
             </figure>
-            <AtlasFooter
-              section="Regulatory direction"
-              note="SWM & C&D Rules 2016–2026 · Supreme Court, Feb 2026"
-              tone="dark"
-            />
           </div>
         </section>
 
@@ -439,10 +430,6 @@ export function OutlookView() {
                 <span className="fb-sub">Aggregate · M-sand · paver blocks</span>
               </div>
             </div>
-            <AtlasFooter
-              section="C&D processing line"
-              note="Seven stages · mixed C&D in, graded material out"
-            />
           </div>
         </section>
 
@@ -498,11 +485,6 @@ export function OutlookView() {
                 </span>
               </div>
             </div>
-            <AtlasFooter
-              section="Recovered material"
-              note="Recycled aggregate · M-sand · paver blocks · inert cover"
-              tone="dark"
-            />
           </div>
         </section>
       </main>

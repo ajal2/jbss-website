@@ -26,12 +26,9 @@ export function SelectedWork({ projects }: Props) {
       <div className="container-x">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <div className="mb-[22px] flex items-center gap-3.5">
+            <div className="mb-[22px] flex items-center gap-3">
               <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-tx-faint">
                 Selected work
-              </span>
-              <span className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-tx-faint/70">
-                Sheet 04/06
               </span>
             </div>
             <h2 className="text-h1 text-ink">What we build and run.</h2>
@@ -185,7 +182,7 @@ export function SelectedWork({ projects }: Props) {
           })}
         </div>
 
-        <div className="mt-[clamp(24px,3vw,36px)] flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-line pt-5">
+        <div className="mt-[clamp(24px,3vw,36px)] border-t border-line pt-5">
           <Link
             href="/projects"
             className="group inline-flex items-center gap-2.5 border-b-2 border-terra pb-[3px] font-semibold text-ink"
@@ -195,10 +192,6 @@ export function SelectedWork({ projects }: Props) {
               →
             </span>
           </Link>
-          <span className="font-mono text-[0.6rem] uppercase tracking-[0.16em] tabular-nums text-tx-faint">
-            <span className="opacity-55">JBSS LLP · </span>Selected work
-            <span className="opacity-55"> · 2026</span>
-          </span>
         </div>
       </div>
     </section>

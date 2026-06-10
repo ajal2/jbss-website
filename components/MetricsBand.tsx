@@ -1,7 +1,7 @@
 import { getVisibleProjects, type Project } from "@/lib/cms";
 import { formatNumber } from "@/lib/format";
 import { deriveStateName } from "@/lib/location";
-import { SheetHead, AtlasFooter, SurveyField } from "@/components/Atlas";
+import { SheetHead, SurveyField } from "@/components/Atlas";
 
 const FOUNDING_YEAR = 2016;
 
@@ -106,13 +106,6 @@ export function MetricsBand({ projects }: Props) {
               </div>
             </div>
           ))}
-        </div>
-        <div className="px-[var(--gutter)] pb-[clamp(26px,3vw,42px)]">
-          <AtlasFooter
-            section="Key figures"
-            note="Operating since 2016 · Gurgaon, Haryana"
-            tone="dark"
-          />
         </div>
       </div>
     </section>

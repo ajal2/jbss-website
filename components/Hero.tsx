@@ -102,17 +102,6 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Atlas baseline — datum strip grounding the cover plate */}
-      <div className="container-x relative">
-        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 border-t border-white/15 py-3.5 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-white/50">
-          <span className="flex flex-wrap items-center gap-x-3.5 gap-y-1 tabular-nums">
-            <span>Est. 2016</span>
-            <span className="text-white/25">·</span>
-            <span>28.47°N 77.03°E · Gurgaon, Haryana</span>
-          </span>
-          <span className="text-white/40">{SLIDES[active].credit}</span>
-        </div>
-      </div>
     </section>
   );
 }

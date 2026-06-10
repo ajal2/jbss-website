@@ -119,12 +119,9 @@ export function FootprintMap({ projects }: Props) {
         {/* Head */}
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <div className="mb-[22px] flex items-center gap-3.5">
+            <div className="mb-[22px] flex items-center gap-3">
               <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-tx-faint">
                 Geographic footprint
-              </span>
-              <span className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-tx-faint/70">
-                Sheet 05/06
               </span>
             </div>
             <h2 className="text-h1 text-ink">

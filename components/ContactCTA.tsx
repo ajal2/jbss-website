@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SheetHead, AtlasFooter, SurveyField } from "@/components/Atlas";
+import { SheetHead, SurveyField } from "@/components/Atlas";
 
 export function ContactCTA() {
   return (
@@ -81,11 +81,6 @@ export function ContactCTA() {
             </ul>
           </div>
         </div>
-        <AtlasFooter
-          section="Contact"
-          note="Public sector · institutions · private"
-          tone="dark"
-        />
       </div>
     </section>
   );
