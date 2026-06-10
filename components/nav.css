@@ -1,0 +1,191 @@
+/* ============================================================
+   Floating glass nav — from the Claude Design hero-banner handoff.
+   Scoped under .jbss-nav-*; reuses the global palette + Space Mono.
+   No font, page, or token changes elsewhere.
+   ============================================================ */
+.jbss-nav-wrap {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 80;
+  padding: 14px var(--gutter) 0;
+  pointer-events: none;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+.jbss-nav {
+  pointer-events: auto;
+  max-width: 1320px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 10px 12px 10px 20px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+/* frosted glass once past 24px scroll */
+.jbss-nav.scrolled {
+  background: color-mix(in srgb, var(--card) 80%, transparent);
+  border-color: var(--line);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 18px 44px -28px rgba(32, 37, 31, 0.5);
+}
+.jbss-nav .logo-box {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  background: var(--card);
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+}
+.jbss-nav .nlinks {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-left: 8px;
+}
+.jbss-nav .nlinks a {
+  position: relative;
+  padding: 6px 0;
+  font-size: 0.93rem;
+  font-weight: 550;
+  color: var(--tx-soft);
+  transition: color 0.2s ease;
+}
+.jbss-nav .nlinks a:hover,
+.jbss-nav .nlinks a.active {
+  color: var(--tx);
+}
+/* dark-hero pages: transparent nav sits on the photo → light links until scrolled */
+.jbss-nav.nav-on-dark:not(.scrolled) .nlinks a {
+  color: rgba(255, 255, 255, 0.82);
+  text-shadow: 0 1px 12px rgba(15, 20, 15, 0.45);
+}
+.jbss-nav.nav-on-dark:not(.scrolled) .nlinks a:hover,
+.jbss-nav.nav-on-dark:not(.scrolled) .nlinks a.active {
+  color: #fff;
+}
+.jbss-nav.nav-on-dark:not(.scrolled) .menu-btn {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+/* animated terracotta underline */
+.jbss-nav .nlinks a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: var(--terra);
+  transition: width 0.25s var(--ease-out);
+}
+.jbss-nav .nlinks a:hover::after,
+.jbss-nav .nlinks a.active::after {
+  width: 100%;
+}
+.jbss-nav .spacer {
+  margin-left: auto;
+}
+/* scroll-progress hairline on the pill's bottom edge */
+.jbss-nav-progress {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.jbss-nav.scrolled .jbss-nav-progress {
+  opacity: 1;
+}
+.jbss-nav-progress i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--green), var(--terra));
+}
+/* CTA */
+.jbss-nav .ctabtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 0.93rem;
+  font-weight: 650;
+  line-height: 1;
+  background: var(--green);
+  color: #fff;
+  border: 1.5px solid var(--green);
+  transition: transform 0.35s var(--ease-out), background 0.25s ease, border-color 0.25s ease;
+}
+.jbss-nav .ctabtn .arr {
+  display: inline-block;
+  transition: transform 0.3s var(--ease-out);
+}
+.jbss-nav .ctabtn:hover {
+  background: var(--green-700);
+  border-color: var(--green-700);
+  transform: translateY(-2px);
+}
+.jbss-nav .ctabtn:hover .arr {
+  transform: translateX(5px);
+}
+.jbss-nav .ctabtn:active {
+  transform: scale(0.97);
+}
+.jbss-nav .menu-btn {
+  display: none;
+}
+/* mobile dropdown */
+.jbss-nav-mobile {
+  display: none;
+}
+@media (max-width: 860px) {
+  .jbss-nav .nlinks,
+  .jbss-nav .ctabtn {
+    display: none;
+  }
+  .jbss-nav .menu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-weight: 600;
+    color: var(--tx);
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .jbss-nav-mobile {
+    pointer-events: auto;
+    max-width: 1320px;
+    margin: 8px auto 0;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 24px 60px -30px rgba(32, 37, 31, 0.55);
+    flex-direction: column;
+    padding: 12px;
+  }
+  .jbss-nav-mobile.open {
+    display: flex;
+  }
+  .jbss-nav-mobile a {
+    padding: 13px 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    color: var(--tx-soft);
+  }
+  .jbss-nav-mobile a:hover {
+    background: var(--mist);
+    color: var(--tx);
+  }
+}
