@@ -3,12 +3,18 @@
 import { useEffect, useRef } from "react";
 import "./outlook.css";
 import { SheetHead, SurveyField, Ticks } from "@/components/Atlas";
+import { OutlookMap } from "@/components/OutlookMap";
 
 // Inline CSS custom properties (--h, --w, --i …) typed for React.
 const v = (vars: Record<string, string | number>): React.CSSProperties =>
   vars as React.CSSProperties;
 
-export function OutlookView() {
+type OutlookViewProps = {
+  /** States where JBSS operates, for the hero coverage map. */
+  footprintStates: string[];
+};
+
+export function OutlookView({ footprintStates }: OutlookViewProps) {
   const rootRef = useRef<HTMLDivElement>(null);
 
   // Ported from the design's outlook.js: scroll reveals, the staircase chart
@@ -139,21 +145,8 @@ export function OutlookView() {
                   duty.
                 </p>
               </div>
-              <aside className="lede-ladder reveal d2" aria-hidden="true">
-                <ol className="ladder">
-                  <li className="lad" style={v({ "--w": "38%" })}>
-                    <span className="lad-k">Then</span>
-                    <span className="lad-v">Guideline</span>
-                  </li>
-                  <li className="lad" style={v({ "--w": "66%" })}>
-                    <span className="lad-k">2016 to 2024</span>
-                    <span className="lad-v">Statutory</span>
-                  </li>
-                  <li className="lad" style={v({ "--w": "100%" })}>
-                    <span className="lad-k">2025 to 2026</span>
-                    <span className="lad-v">Constitutional</span>
-                  </li>
-                </ol>
+              <aside className="lede-fig reveal d2">
+                <OutlookMap footprintStates={footprintStates} />
               </aside>
             </div>
           </div>
