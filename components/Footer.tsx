@@ -75,10 +75,10 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:jbss0786@gmail.com"
+                  href="mailto:sandeepjalota@jbssgroup.com"
                   className="break-all hover:text-white"
                 >
-                  jbss0786@gmail.com
+                  sandeepjalota@jbssgroup.com
                 </a>
               </li>
               <li>
