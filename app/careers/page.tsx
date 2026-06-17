@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Careers — JBSS",
   description:
     "Open roles at JBSS LLP. Join the team building India's waste infrastructure.",
+  alternates: { canonical: "/careers" },
 };
 
 export default async function CareersPage() {

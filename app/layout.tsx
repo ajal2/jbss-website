@@ -23,6 +23,31 @@ const SITE_DESC =
   "Jalota Business Support Services LLP. We build Construction & Demolition processing plants and municipal sanitation systems turnkey, then run them for up to 15 years.";
 const SITE_URL = "https://jbssgroup.com";
 
+// schema.org Organization — gives search engines a structured identity
+// (legal name, logo, address, contact) for richer results and
+// knowledge-panel eligibility. Rendered as JSON-LD in <body> below.
+const ORG_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Jalota Business Support Services LLP",
+  alternateName: "JBSS LLP",
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo.svg`,
+  foundingDate: "2016",
+  description: SITE_DESC,
+  email: "sandeepjalota@jbssgroup.com",
+  telephone: "+91-98916-66049",
+  areaServed: "IN",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "58 GF, The Sapphire, Sector 49, Sohna Road",
+    addressLocality: "Gurgaon",
+    addressRegion: "Haryana",
+    postalCode: "122018",
+    addressCountry: "IN",
+  },
+};
+
 export const metadata: Metadata = {
   title: SITE_TITLE,
   description: SITE_DESC,
@@ -67,6 +92,10 @@ export default function RootLayout({
       className={`${archivo.variable} ${spaceMono.variable}`}
     >
       <body className="flex min-h-screen flex-col bg-paper text-ink antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_SCHEMA) }}
+        />
         <Nav />
         <div className="flex-1">{children}</div>
         <Footer />

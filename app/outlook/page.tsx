@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Outlook — JBSS LLP",
   description:
     "India's waste rules are tightening from guideline to statutory and constitutional obligation. JBSS builds and operates the C&D and sanitation infrastructure those rules require.",
+  alternates: { canonical: "/outlook" },
 };
 
 // Static render, regenerated hourly — mirrors the homepage so Notion edits

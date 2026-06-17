@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getProjects, getVisibleProjects } from "@/lib/cms";
 import { ProjectsTable } from "@/components/ProjectsTable";
 import { RevealObserver } from "@/components/RevealOnScroll";
@@ -5,6 +6,13 @@ import { Stat } from "@/components/Stat";
 import { SurveyField } from "@/components/Atlas";
 
 export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  title: "Projects — JBSS LLP",
+  description:
+    "Construction & Demolition processing plants and municipal solid-waste systems JBSS has built and operates across India — capacities, locations, and live status.",
+  alternates: { canonical: "/projects" },
+};
 
 export default async function ProjectsPage() {
   const projects = await getProjects();
