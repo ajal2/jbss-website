@@ -5,7 +5,9 @@ import { RevealObserver } from "@/components/RevealOnScroll";
 import { Stat } from "@/components/Stat";
 import { SurveyField } from "@/components/Atlas";
 
-export const revalidate = 3600;
+// Careers is edited live in Notion — fetch on every request so a new row
+// shows up on the next refresh instead of waiting on the ISR cache window.
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Careers — JBSS",
