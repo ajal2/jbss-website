@@ -36,7 +36,7 @@
 .outlook .lede { padding-block: clamp(56px, 9vh, 116px) clamp(48px, 7vh, 92px); }
 .outlook .lede-grid {
   display: grid; grid-template-columns: 1.55fr 1fr; gap: clamp(34px, 5vw, 80px);
-  align-items: end;
+  align-items: start;
 }
 .outlook .lede-h1 {
   font-size: var(--step-hero); font-weight: 800; letter-spacing: -0.04em; line-height: 1;
@@ -56,8 +56,7 @@
 }
 .outlook .lmk {
   display: inline-flex; align-items: center; gap: 8px;
-  font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--tx-faint);
+  font-size: 0.64rem; font-weight: 500; color: var(--tx-faint);
 }
 .outlook .lmk-sw {
   width: 12px; height: 12px; border-radius: 2px; flex: none;
@@ -98,8 +97,7 @@
 }
 .outlook .tier .t-lbl {
   position: absolute; left: 0; width: 120px; top: -0.62em; text-align: right;
-  font-family: var(--mono); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--on-3); line-height: 1.25;
+  font-size: 0.72rem; font-weight: 600; color: var(--on-3); line-height: 1.25;
 }
 .outlook .tier.base::after { border-top-style: solid; border-top-color: var(--hair-d); }
 .outlook .tier.base .t-lbl { color: color-mix(in srgb, var(--on-3) 80%, transparent); }
@@ -171,8 +169,8 @@
 }
 .outlook .climb.in .step .cap { opacity: 1; transform: none; }
 .outlook .cap-tag {
-  display: inline-block; white-space: nowrap; font-family: var(--mono); font-size: 0.56rem; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 7px; border-radius: 3px;
+  display: inline-block; white-space: nowrap; font-size: 0.56rem; font-weight: 600;
+  padding: 3px 7px; border-radius: 3px;
   border: 1px solid var(--hair-d); color: var(--on-2);
 }
 .outlook .cap-tag.cd { color: var(--terra-300); border-color: color-mix(in srgb, var(--terra-300) 50%, transparent); }
@@ -180,7 +178,7 @@
 .outlook .cap-tag.epr { color: var(--green-300); border-color: color-mix(in srgb, var(--green-300) 45%, transparent); }
 .outlook .cap-tag.both { color: var(--on); border-color: var(--hair-d); }
 .outlook .cap-tag.law { color: var(--ink); background: #f4ddca; border-color: #f4ddca; }
-.outlook .cap-year { display: block; margin-top: 8px; font-family: var(--mono); font-weight: 700; font-size: 1.32rem; letter-spacing: -0.01em; color: var(--on); font-variant-numeric: tabular-nums; line-height: 1; }
+.outlook .cap-year { display: block; margin-top: 8px; font-weight: 700; font-size: 1.32rem; letter-spacing: -0.01em; color: var(--on); font-variant-numeric: tabular-nums; line-height: 1; }
 .outlook .step.apex .cap-year { color: #f4ddca; }
 .outlook .cap-name { display: block; margin-top: 5px; font-size: 0.92rem; font-weight: 700; letter-spacing: -0.01em; color: var(--on); line-height: 1.18; text-wrap: balance; }
 
@@ -189,7 +187,7 @@
   position: absolute; left: 138px; right: 0; bottom: -34px;
   display: grid; grid-template-columns: repeat(5, 1fr);
 }
-.outlook .xaxis .xt { text-align: center; font-family: var(--mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; color: var(--on-2); font-variant-numeric: tabular-nums; }
+.outlook .xaxis .xt { text-align: center; font-size: 0.72rem; font-weight: 600; color: var(--on-2); font-variant-numeric: tabular-nums; }
 
 /* ============================================================
    APEX QUOTE (capstone)
@@ -235,7 +233,7 @@
   display: flex; flex-direction: column; gap: 5px; padding: 18px;
   border-radius: 6px; background: var(--card); border: 1px solid var(--line); min-width: 150px;
 }
-.outlook .fb-end .fb-k { font-family: var(--mono); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tx-faint); }
+.outlook .fb-end .fb-k { font-size: 0.64rem; font-weight: 600; color: var(--tx-faint); }
 .outlook .fb-end .fb-v { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; color: var(--tx); }
 .outlook .fb-end .fb-sub { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.02em; color: var(--tx-soft); }
 .outlook .fb-in { border-left: 4px solid var(--green); }
@@ -265,7 +263,7 @@
 .outlook .proc-ic svg { width: 34px; height: 34px; display: block; color: var(--tx); fill: none; stroke: var(--tx); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .outlook .proc-ic svg .f { fill: currentColor; stroke: none; }
 .outlook .proc-step.lit .proc-ic { border-color: var(--terra); box-shadow: 0 0 0 4px color-mix(in srgb, var(--terra) 14%, transparent); transform: translateY(-2px); }
-.outlook .proc-step .ps-n { margin-top: 14px; font-family: var(--mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em; color: var(--terra-700); font-variant-numeric: tabular-nums; }
+.outlook .proc-step .ps-n { margin-top: 14px; font-size: 0.66rem; font-weight: 600; color: var(--terra-700); font-variant-numeric: tabular-nums; }
 .outlook .proc-step h3 { font-size: 0.98rem; font-weight: 700; letter-spacing: -0.01em; margin-top: 5px; color: var(--tx); }
 .outlook .proc-step p { margin-top: 8px; color: var(--tx-soft); font-size: 0.8rem; line-height: 1.4; max-width: 18ch; }
 
@@ -291,7 +289,7 @@
   background: var(--hair-d); border: 1px solid var(--hair-d);
 }
 .outlook .dest { background: var(--ink); padding: clamp(22px, 3vw, 34px); display: flex; flex-direction: column; gap: 7px; }
-.outlook .dest-n { font-family: var(--mono); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; color: var(--terra-300); font-variant-numeric: tabular-nums; }
+.outlook .dest-n { font-size: 0.62rem; font-weight: 600; color: var(--terra-300); font-variant-numeric: tabular-nums; }
 .outlook .dest-out { font-size: 1.18rem; font-weight: 800; letter-spacing: -0.02em; color: var(--on); }
 .outlook .dest-to { font-size: 0.9rem; line-height: 1.45; color: var(--on-3); }
 

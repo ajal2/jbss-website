@@ -47,10 +47,10 @@ export function WhatWeDo({ projects }: Props) {
             </div>
             <div className="flex flex-1 flex-col gap-4 p-[clamp(22px,2.5vw,34px)]">
               <div className="flex items-center gap-3">
-                <span className="rounded-[3px] bg-terra px-2.5 py-[5px] font-mono text-[0.68rem] font-bold uppercase tracking-[0.1em] text-white">
+                <span className="rounded-[3px] bg-terra px-2.5 py-[5px] text-[0.68rem] font-semibold text-white">
                   C&amp;D
                 </span>
-                <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-tx-faint">
+                <span className="text-[0.8rem] font-semibold text-tx-faint">
                   Construction &amp; Demolition
                 </span>
               </div>
@@ -76,7 +76,7 @@ export function WhatWeDo({ projects }: Props) {
                 <span className="text-2xl font-extrabold tracking-[-0.03em] tabular-nums text-terra-700">
                   {formatNumber(tpdCnd)}
                 </span>
-                <span className="font-mono text-[0.72rem] uppercase tracking-[0.08em] text-tx-faint">
+                <span className="text-[0.72rem] font-medium text-tx-faint">
                   TPD installed
                 </span>
               </div>
@@ -97,10 +97,10 @@ export function WhatWeDo({ projects }: Props) {
             </div>
             <div className="flex flex-1 flex-col gap-4 p-[clamp(22px,2.5vw,34px)]">
               <div className="flex items-center gap-3">
-                <span className="rounded-[3px] bg-green px-2.5 py-[5px] font-mono text-[0.68rem] font-bold uppercase tracking-[0.1em] text-white">
+                <span className="rounded-[3px] bg-green px-2.5 py-[5px] text-[0.68rem] font-semibold text-white">
                   SWM
                 </span>
-                <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-tx-faint">
+                <span className="text-[0.8rem] font-semibold text-tx-faint">
                   Solid Waste Management
                 </span>
               </div>
@@ -126,7 +126,7 @@ export function WhatWeDo({ projects }: Props) {
                 <span className="text-2xl font-extrabold tracking-[-0.03em] tabular-nums text-green-700">
                   {omSites}+
                 </span>
-                <span className="font-mono text-[0.72rem] uppercase tracking-[0.08em] text-tx-faint">
+                <span className="text-[0.72rem] font-medium text-tx-faint">
                   sites operated
                 </span>
               </div>

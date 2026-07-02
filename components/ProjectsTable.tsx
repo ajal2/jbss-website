@@ -177,7 +177,7 @@ export function ProjectsTable({ projects }: Props) {
 
       {/* Result count */}
       <div className="flex justify-end px-0 pb-1 pt-3.5">
-        <span className="font-mono text-[0.72rem] uppercase tracking-[0.06em] text-tx-faint">
+        <span className="text-[0.72rem] font-medium text-tx-faint">
           {countLabel}
         </span>
       </div>
@@ -218,7 +218,7 @@ export function ProjectsTable({ projects }: Props) {
               <tr>
                 <td
                   colSpan={6}
-                  className="py-[60px] text-center font-mono text-[0.85rem] uppercase tracking-[0.06em] text-tx-faint"
+                  className="py-[60px] text-center text-[0.85rem] font-medium text-tx-faint"
                 >
                   No projects match these filters.
                 </td>
@@ -262,7 +262,7 @@ function FilterGroup({
 }) {
   return (
     <div className="flex items-center gap-2.5">
-      <span className="font-mono text-[0.66rem] uppercase tracking-[0.12em] text-tx-faint">
+      <span className="text-[0.66rem] font-medium text-tx-faint">
         {label}
       </span>
       <div className="inline-flex gap-0.5 rounded-md border border-line bg-mist p-[3px]">
@@ -317,7 +317,7 @@ function HeaderCell({
       aria-sort={
         isActive ? (dir === "asc" ? "ascending" : "descending") : undefined
       }
-      className={`cursor-pointer select-none whitespace-nowrap border-b border-line p-[16px_14px] font-mono text-[0.66rem] font-bold uppercase tracking-[0.1em] text-tx-faint ${
+      className={`cursor-pointer select-none whitespace-nowrap border-b border-line p-[16px_14px] text-[0.66rem] font-semibold text-tx-faint ${
         numeric ? "text-right" : "text-left"
       }`}
     >
@@ -354,7 +354,7 @@ function LineChip({ row }: { row: Row }) {
 function StatusEl({ row }: { row: Row }) {
   if (row.statusKey === "ongoing") {
     return (
-      <span className="inline-flex items-center gap-2 whitespace-nowrap font-mono text-[0.72rem] uppercase tracking-[0.06em] text-tx-soft">
+      <span className="inline-flex items-center gap-2 whitespace-nowrap text-[0.72rem] font-medium text-tx-soft">
         <span className="relative inline-block h-2 w-2 flex-none rounded-full bg-st-ongoing">
           <span
             aria-hidden
@@ -371,7 +371,7 @@ function StatusEl({ row }: { row: Row }) {
   }
   if (row.statusKey === "completed") {
     return (
-      <span className="inline-flex items-center gap-2 whitespace-nowrap font-mono text-[0.72rem] uppercase tracking-[0.06em] text-tx-soft">
+      <span className="inline-flex items-center gap-2 whitespace-nowrap text-[0.72rem] font-medium text-tx-soft">
         <span className="inline-block h-2 w-2 flex-none rounded-full bg-st-done" />
         Completed
       </span>
@@ -439,7 +439,7 @@ function RowAndDrawer({
           >
             <div className="grid grid-cols-1 gap-x-[clamp(20px,3vw,48px)] gap-y-5 px-[14px] pb-[26px] pt-1.5 md:grid-cols-[1.4fr_1fr]">
               <div className="max-w-[60ch] leading-[1.6] text-tx-soft">
-                <span className="mb-2.5 block font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-tx-faint">
+                <span className="mb-2.5 block text-[0.8rem] font-semibold text-tx-faint">
                   Scope of work
                 </span>
                 {row.scope}
@@ -463,7 +463,7 @@ function RowAndDrawer({
 function Spec({ k, v, tnum }: { k: string; v: string; tnum?: boolean }) {
   return (
     <div>
-      <div className="font-mono text-[0.64rem] uppercase tracking-[0.1em] text-tx-faint">
+      <div className="text-[0.64rem] font-medium text-tx-faint">
         {k}
       </div>
       <div

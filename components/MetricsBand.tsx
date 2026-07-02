@@ -99,7 +99,7 @@ export function MetricsBand({ projects }: Props) {
                   </em>
                 )}
               </div>
-              <div className="mt-3 font-mono text-[0.68rem] uppercase tracking-[0.12em] leading-[1.5] text-tx-dim">
+              <div className="mt-3 text-[0.68rem] font-medium leading-[1.5] text-tx-dim">
                 {item.l1}
                 <br />
                 {item.l2}

@@ -184,7 +184,7 @@ export function CapabilitiesPipeline() {
                 >
                   {step.icon}
                 </div>
-                <div className="mt-4 font-mono text-[0.68rem] uppercase tracking-[0.1em] text-tx-dim">
+                <div className="mt-4 text-[0.68rem] font-medium text-tx-dim">
                   {step.num}
                 </div>
                 <h4 className="mt-1.5 text-[1.15rem] font-bold text-white">

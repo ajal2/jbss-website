@@ -120,7 +120,7 @@ export function FootprintMap({ projects }: Props) {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <div className="mb-[22px] flex items-center gap-3">
-              <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-tx-faint">
+              <span className="text-[0.8rem] font-semibold text-tx-faint">
                 Geographic footprint
               </span>
             </div>
@@ -129,16 +129,16 @@ export function FootprintMap({ projects }: Props) {
             </h2>
           </div>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <span className="inline-flex items-center gap-2 font-mono text-[0.72rem] uppercase tracking-[0.08em] text-tx-soft">
+            <span className="inline-flex items-center gap-2 text-[0.72rem] font-medium text-tx-soft">
               <span className="inline-block h-2 w-2 rounded-full bg-green" />
               SWM
             </span>
-            <span className="inline-flex items-center gap-2 font-mono text-[0.72rem] uppercase tracking-[0.08em] text-tx-soft">
+            <span className="inline-flex items-center gap-2 text-[0.72rem] font-medium text-tx-soft">
               <span className="inline-block h-2 w-2 rounded-full bg-terra" />
               C&amp;D
             </span>
             <span className="h-3.5 w-px bg-line" />
-            <span className="inline-flex items-center gap-2 font-mono text-[0.72rem] uppercase tracking-[0.08em] text-tx-soft">
+            <span className="inline-flex items-center gap-2 text-[0.72rem] font-medium text-tx-soft">
               <span className="relative inline-flex h-2 w-2">
                 <span
                   aria-hidden
@@ -153,7 +153,7 @@ export function FootprintMap({ projects }: Props) {
               </span>
               Ongoing
             </span>
-            <span className="inline-flex items-center gap-2 font-mono text-[0.72rem] uppercase tracking-[0.08em] text-tx-soft">
+            <span className="inline-flex items-center gap-2 text-[0.72rem] font-medium text-tx-soft">
               <span className="inline-block h-2 w-2 rounded-full bg-st-done" />
               Completed
             </span>
@@ -187,7 +187,7 @@ export function FootprintMap({ projects }: Props) {
 
             {/* Drag hint at first load */}
             {zoom > 1 && (
-              <div className="absolute bottom-5 left-5 z-10 font-mono text-[0.6rem] uppercase tracking-[0.14em] text-tx-faint">
+              <div className="absolute bottom-5 left-5 z-10 text-[0.6rem] font-medium text-tx-faint">
                 Drag to pan · Scroll to zoom
               </div>
             )}
@@ -203,7 +203,7 @@ export function FootprintMap({ projects }: Props) {
             {/* Projection / datum caption — doubles as the India-aligned
                 credibility signal; swaps out for the drag hint when zoomed */}
             {zoom === 1 && (
-              <div className="pointer-events-none absolute bottom-5 left-5 z-[4] font-mono text-[0.58rem] uppercase leading-[1.6] tracking-[0.14em] text-tx-faint">
+              <div className="pointer-events-none absolute bottom-5 left-5 z-[4] text-[0.58rem] font-medium leading-[1.6] text-tx-faint">
                 <div>geoMercator</div>
                 <div className="opacity-70">India-aligned datum</div>
               </div>
@@ -377,14 +377,14 @@ export function FootprintMap({ projects }: Props) {
                     className="inline-block h-1.5 w-1.5 rounded-full"
                     style={{ background: hovered.isCnd ? "#E0A183" : "#8FBF9C" }}
                   />
-                  <span className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-tx-dim">
+                  <span className="text-[0.6rem] font-medium text-tx-dim">
                     {hovered.isCnd ? "C&D plant" : "SWM site"}
                   </span>
                 </div>
                 <div className="mt-1.5 text-[0.9rem] font-bold leading-tight">
                   {hovered.name}
                 </div>
-                <div className="mt-1 font-mono text-[0.62rem] uppercase tracking-[0.1em] text-tx-dim">
+                <div className="mt-1 text-[0.62rem] font-medium text-tx-dim">
                   {hovered.city}
                   {hovered.state ? ` · ${hovered.state}` : ""}
                   {" · "}
@@ -415,13 +415,13 @@ export function FootprintMap({ projects }: Props) {
             {delhiPins.length > 0 && (
               <div>
                 <div className="mb-3 flex items-baseline justify-between gap-3">
-                  <p className="font-mono text-[0.7rem] font-bold uppercase tracking-[0.18em] text-ink">
+                  <p className="text-[0.7rem] font-semibold text-ink">
                     Delhi NCR
                   </p>
                   <button
                     type="button"
                     onClick={zoomToDelhi}
-                    className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-tx-faint underline-offset-2 hover:text-terra-700 hover:underline"
+                    className="text-[0.6rem] font-medium text-tx-faint underline-offset-2 hover:text-terra-700 hover:underline"
                   >
                     Focus →
                   </button>
@@ -551,11 +551,9 @@ export function FootprintMap({ projects }: Props) {
                             y={3}
                             style={{
                               fontFamily:
-                                "var(--font-space-mono), monospace",
+                                "var(--font-archivo), sans-serif",
                               fontSize: 8,
-                              fontWeight: 700,
-                              letterSpacing: "0.04em",
-                              textTransform: "uppercase",
+                              fontWeight: 600,
                               fill: "#20251F",
                               paintOrder: "stroke",
                               stroke: "var(--paper)",
@@ -571,7 +569,7 @@ export function FootprintMap({ projects }: Props) {
                     })}
                   </ComposableMap>
                 </div>
-                <p className="mt-2 font-mono text-[0.6rem] uppercase tracking-[0.14em] text-tx-faint">
+                <p className="mt-2 text-[0.6rem] font-medium text-tx-faint">
                   {delhiPins.length} {delhiPins.length === 1 ? "site" : "sites"} · 1:500K
                 </p>
               </div>
@@ -579,7 +577,7 @@ export function FootprintMap({ projects }: Props) {
 
             {/* By state */}
             <div>
-              <p className="mb-3 font-mono text-[0.7rem] font-bold uppercase tracking-[0.18em] text-terra-700">
+              <p className="mb-3 text-[0.7rem] font-semibold text-terra-700">
                 By state
               </p>
               <ul>
@@ -641,7 +639,7 @@ function ReadoutFig({ n, label }: { n: number; label: string }) {
       <div className="text-[1.55rem] font-extrabold leading-none tracking-[-0.03em] tabular-nums text-ink">
         {String(n).padStart(2, "0")}
       </div>
-      <div className="mt-1.5 text-[0.58rem] uppercase tracking-[0.16em] text-tx-faint">
+      <div className="mt-1.5 text-[0.58rem] font-medium text-tx-faint">
         {label}
       </div>
     </div>

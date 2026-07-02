@@ -31,7 +31,7 @@ export function Footer() {
 
           {/* Pages */}
           <div>
-            <h4 className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.12em] text-green-300">
+            <h4 className="text-[0.8rem] font-semibold text-green-300">
               Pages
             </h4>
             <ul className="mt-3.5 flex flex-col gap-2.5">
@@ -47,7 +47,7 @@ export function Footer() {
 
           {/* Office */}
           <div>
-            <h4 className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.12em] text-green-300">
+            <h4 className="text-[0.8rem] font-semibold text-green-300">
               Office
             </h4>
             <address className="mt-3.5 not-italic leading-[1.7] text-[0.92rem] text-[#aab09f]">
@@ -61,7 +61,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.12em] text-green-300">
+            <h4 className="text-[0.8rem] font-semibold text-green-300">
               Contact
             </h4>
             <ul className="mt-3.5 flex flex-col gap-2.5 text-[0.92rem]">
@@ -91,7 +91,7 @@ export function Footer() {
         </div>
 
         {/* Baseline */}
-        <div className="flex flex-wrap justify-between gap-3 border-t border-line-dk py-[22px] font-mono text-[0.68rem] uppercase tracking-[0.08em] text-[#8b9182]">
+        <div className="flex flex-wrap justify-between gap-3 border-t border-line-dk py-[22px] text-[0.68rem] font-medium text-[#8b9182]">
           <span>© {year} Jalota Business Support Services LLP</span>
           <span>Gurgaon · India</span>
         </div>

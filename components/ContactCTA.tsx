@@ -43,7 +43,7 @@ export function ContactCTA() {
           <div
             className="reveal rounded-lg border border-line-dk bg-ink-2 p-[clamp(24px,3vw,34px)]"
           >
-            <p className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-green-300">
+            <p className="text-[0.8rem] font-semibold text-green-300">
               Registered office
             </p>
             <address className="mt-3.5 not-italic leading-[1.7] text-[#dcd8cc]">
@@ -53,7 +53,7 @@ export function ContactCTA() {
               <br />
               Gurgaon, Haryana 122018
             </address>
-            <p className="mt-[22px] font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-green-300">
+            <p className="mt-[22px] text-[0.8rem] font-semibold text-green-300">
               Get in touch
             </p>
             <ul className="mt-3.5 flex flex-col gap-2 leading-[1.6] text-[#dcd8cc]">

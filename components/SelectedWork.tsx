@@ -27,7 +27,7 @@ export function SelectedWork({ projects }: Props) {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <div className="mb-[22px] flex items-center gap-3">
-              <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-tx-faint">
+              <span className="text-[0.8rem] font-semibold text-tx-faint">
                 Selected work
               </span>
             </div>
@@ -96,7 +96,7 @@ export function SelectedWork({ projects }: Props) {
                         >
                           {p.businessLine ?? "JBSS"}
                         </div>
-                        <div className="mt-3.5 font-mono text-[0.56rem] uppercase tracking-[0.2em] text-tx-faint">
+                        <div className="mt-3.5 text-[0.56rem] font-medium text-tx-faint">
                           {p.city?.name?.split(",")[0]?.trim() ?? "JBSS LLP"}
                           {" · No site photo"}
                         </div>
@@ -115,7 +115,7 @@ export function SelectedWork({ projects }: Props) {
 
                 <div className="flex flex-1 flex-col gap-2.5 px-5 pb-[22px] pt-[18px]">
                   {/* Mono spec row — uniform monochrome: status · model · line */}
-                  <div className="flex flex-wrap items-center gap-2.5 font-mono text-[0.7rem] uppercase tracking-[0.06em] text-tx-faint">
+                  <div className="flex flex-wrap items-center gap-2.5 text-[0.7rem] font-medium text-tx-faint">
                     <span className="inline-flex items-center gap-1.5 text-tx-soft">
                       <span
                         className={`relative inline-block h-2 w-2 rounded-full ${
@@ -170,7 +170,7 @@ export function SelectedWork({ projects }: Props) {
                         {capFigure}
                       </span>
                       {capUnit && (
-                        <span className="font-mono text-[0.72rem] uppercase tracking-[0.08em] text-tx-faint">
+                        <span className="text-[0.72rem] font-medium text-tx-faint">
                           {capUnit}
                         </span>
                       )}

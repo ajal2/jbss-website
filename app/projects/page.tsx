@@ -36,7 +36,7 @@ export default async function ProjectsPage() {
           <div className="flex flex-wrap items-end justify-between gap-7 py-[clamp(40px,6vw,72px)]">
             <div>
               <div className="mb-[22px] flex items-center gap-3">
-                <span className="font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em] text-tx-faint">
+                <span className="text-[0.8rem] font-semibold text-tx-faint">
                   Portfolio
                 </span>
               </div>

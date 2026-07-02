@@ -8,7 +8,7 @@ type Tone = "light" | "dark";
 type Accent = "green" | "terra" | "faint";
 
 const EYEBROW =
-  "font-mono text-[0.72rem] font-bold uppercase tracking-[0.18em]";
+  "text-[0.8rem] font-semibold";
 
 function eyebrowColor(accent: Accent, tone: Tone): string {
   if (accent === "green") return "text-green-300";

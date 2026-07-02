@@ -185,10 +185,8 @@ h4 {
   }
   .projects-table td[data-h]::before {
     content: attr(data-h);
-    font-family: var(--font-space-mono), "Space Mono", monospace;
     font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    font-weight: 500;
     color: var(--tx-faint);
     display: inline-block;
     width: 92px;
@@ -221,11 +219,8 @@ h4 {
   border-bottom: 2px solid var(--ink);
 }
 .careers-list .clist-head span {
-  font-family: var(--font-space-mono), "Space Mono", monospace;
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
   color: var(--tx-faint);
 }
 
@@ -282,10 +277,8 @@ h4 {
 }
 .careers-list .crow .dept,
 .careers-list .crow .ctype {
-  font-family: var(--font-space-mono), "Space Mono", monospace;
   font-size: 0.72rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-weight: 500;
   color: var(--tx-faint);
   white-space: nowrap;
 }
@@ -358,11 +351,8 @@ h4 {
   line-height: 1.3;
 }
 .careers-list .cbody h3 {
-  font-family: var(--font-space-mono), "Space Mono", monospace;
   font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-weight: 600;
   color: var(--tx-faint);
   margin: 26px 0 0;
 }
@@ -406,10 +396,8 @@ h4 {
   align-content: start;
 }
 .careers-list .cmeta .dl .k {
-  font-family: var(--font-space-mono), "Space Mono", monospace;
   font-size: 0.64rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-weight: 500;
   color: var(--tx-faint);
 }
 .careers-list .cmeta .dl .v {
@@ -431,11 +419,8 @@ h4 {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  font-family: var(--font-space-mono), "Space Mono", monospace;
   font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-weight: 600;
   color: var(--tx-faint);
   white-space: nowrap;
 }
@@ -482,10 +467,8 @@ h4 {
   .careers-list .crow .ctype,
   .careers-list .crow .loc {
     display: inline;
-    font-family: var(--font-space-mono), "Space Mono", monospace;
     font-size: 0.7rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    font-weight: 500;
     color: var(--tx-faint);
   }
   .careers-list .crow .meta-line {
